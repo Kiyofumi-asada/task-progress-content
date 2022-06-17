@@ -1,0 +1,95 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "productName": "TPC",
+  "description": "client",
+  "homepage": "./",
+  "main": "build/electron/main.js",
+  "proxy": "http://localhost:8080",
+  "license": "ISC",
+  "scripts": {
+    "start": "react-scripts start .env",
+    "start-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
+    "build-local": "react-scripts build .env && tsc -p electron && electron-builder --mac --x64",
+    "build-prod": "react-scripts build .env.production && tsc -p electron && electron-builder --mac --x64",
+    "postinstall": "electron-builder install-app-deps",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --quiet --cache",
+    "lint-staged": "lint-staged"
+  },
+  "build": {
+    "extends": null,
+    "files": [
+      "build/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "build/app-icon.png"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npx tsc --noEmit && npx lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "6.1.1",
+    "@fortawesome/free-regular-svg-icons": "6.1.1",
+    "@fortawesome/free-solid-svg-icons": "6.1.1",
+    "@fortawesome/react-fontawesome": "0.1.18",
+    "@reduxjs/toolkit": "1.8.1",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "13.1.1",
+    "@testing-library/user-event": "13.5.0",
+    "@types/react-redux": "7.1.24",
+    "@types/redux": "3.6.0",
+    "date-fns": "2.28.0",
+    "electron-is-dev": "2.0.0",
+    "electron-reload": "2.0.0-alpha.1",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-hotkeys": "2.0.0",
+    "react-redux": "8.0.1",
+    "react-scripts": "5.0.1",
+    "react-spinners": "0.12.0",
+    "redux-observable": "2.0.0",
+    "web-vitals": "2.1.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "5.21.0",
+    "@typescript-eslint/parser": "5.21.0",
+    "autoprefixer": "10.4.5",
+    "concurrently": "7.1.0",
+    "electron": "18.2.0",
+    "electron-builder": "23.0.3",
+    "eslint": "8.14.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-react": "7.29.4",
+    "husky": "8.0.1",
+    "postcss": "8.4.13",
+    "prettier": "2.6.2",
+    "prettier-plugin-tailwindcss": "0.1.10",
+    "tailwindcss": "3.0.24",
+    "wait-on": "6.0.1"
+  }
+}
