@@ -8,7 +8,6 @@ import { fetchTaskList } from '../../../api';
 
 const Content: React.FC = () => {
   const taskDataList = useSelector(selectTaskList);
-  console.log(taskDataList);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTaskList() as any);
@@ -19,8 +18,10 @@ const Content: React.FC = () => {
       <div className="flex flex-grow">
         <div className="flex min-w-full flex-col overflow-x-auto overflow-y-auto">
           <table className="group table-fixed">
-            <TableHeader headerData={headerData} />
-            <TableBody />
+            <TableHeader headerData={headerData} dataList={taskDataList} />
+            {taskDataList.map((data) => (
+              <TableBody key={data.userId} data={data} />
+            ))}
           </table>
         </div>
       </div>

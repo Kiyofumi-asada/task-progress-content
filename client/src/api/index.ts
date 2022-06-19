@@ -4,29 +4,26 @@ import { taskListMock } from '../presentation/helper/table';
 
 const path = 'task';
 
-const data = taskListMock;
-
 // GET
 export const fetchTaskList = createAsyncThunk('task/fetchTaskList', async () => {
-  // TODO:Mockから値を返す
+  // TODO:apiがつながったら修正mockから値を返す
   // const { status, data } = await axios.get<any[]>(path);
-  return data;
+  return { data: taskListMock };
 });
 
 // POST
-export const postTaskData = createAsyncThunk('task/postChatData', async (body: any) => {
+export const postTaskData = createAsyncThunk('task/postTaskData', async (body: any) => {
   const { status, data } = await axios.post<any[]>(path, body);
   return { status, data };
 });
 // PUT
-export const putTaskData = createAsyncThunk('task/putChatData', async (body: any) => {
+export const putTaskData = createAsyncThunk('task/putTaskData', async (body: any) => {
   const { status, data } = await axios.put<any[]>(path, body);
   return { status, data };
 });
 // DELETE
-export const deleteTaskData = createAsyncThunk('task/deleteChatData', async (id: any) => {
+export const deleteTaskData = createAsyncThunk('task/deleteTaskData', async (id: any) => {
   const deletePath = `${path}/${id}`;
-  console.log(deletePath);
   const { status, data } = await axios.delete<any[]>(deletePath);
   return { status, data };
 });

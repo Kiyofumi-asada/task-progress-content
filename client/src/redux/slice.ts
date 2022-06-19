@@ -18,63 +18,52 @@ const taskSlice = createSlice({
     builder.addCase(fetchTaskList.fulfilled, (state, action) => {
       return {
         ...state,
-        isLoading: false,
-        chatList: action.payload,
+        taskList: action.payload.data,
       };
     });
     builder.addCase(fetchTaskList.rejected, (state) => {
       return {
         ...state,
-        isLoading: false,
-        chatList: initialState.taskList,
+        taskList: initialState.taskList,
       };
     });
     // POST
-    builder.addCase(postTaskData.fulfilled, (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        status: action.payload.status,
-        chatList: action.payload.data,
-      };
-    });
+    // builder.addCase(postTaskData.fulfilled, (state, action) => {
+    //   return {
+    //     ...state,
+    //     taskList: action.payload,
+    //   };
+    // });
     builder.addCase(postTaskData.rejected, (state) => {
       return {
         ...state,
-        isLoading: false,
-        chatList: initialState.taskList,
+        taskList: initialState.taskList,
       };
     });
     // PUT
-    builder.addCase(putTaskData.fulfilled, (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        status: action.payload.status,
-        chatList: action.payload.data,
-      };
-    });
+    // builder.addCase(putTaskData.fulfilled, (state, action) => {
+    //   return {
+    //     ...state,
+    //     taskList: action.payload.data,
+    //   };
+    // });
     builder.addCase(putTaskData.rejected, (state) => {
       return {
         ...state,
-        isLoading: false,
-        chatList: initialState.taskList,
+        taskList: initialState.taskList,
       };
     });
     // DELETE
-    builder.addCase(deleteTaskData.fulfilled, (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        status: action.payload.status,
-        chatList: action.payload.data,
-      };
-    });
+    // builder.addCase(deleteTaskData.fulfilled, (state, action) => {
+    //   return {
+    //     ...state,
+    //     taskList: action.payload.data,
+    //   };
+    // });
     builder.addCase(deleteTaskData.rejected, (state) => {
       return {
         ...state,
-        isLoading: false,
-        chatList: initialState.taskList,
+        taskList: initialState.taskList,
       };
     });
   },

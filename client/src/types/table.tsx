@@ -8,18 +8,21 @@ export type TPartialHeaderData = Partial<THeaderData>;
 export type TTask = {
   userId: number;
   userName: string;
-  data?: {
-    dataId: number;
-    projectName: { id: number; project: string }[];
+  progressData?: {
+    dataId?: number;
+    project?: { id: number; project: string }[];
+    selectedProjectId?: number;
     workContents?: string; //TODO:null許可
+    manDay?: number; //TODO:null許可
     progress: number;
+    requester?: string; //TODO:null許可
     note?: string; //TODO:null許可
-    delete: false; //TODO:null or Date??
+    delete?: boolean; //TODO:null or Date??
   }[];
 };
 
-export type TTaskArray = TTask[];
+export type TTaskArray = Array<TTask>;
 
 export type TInitialState = {
-  taskList: [];
+  taskList: TTaskArray;
 };

@@ -2,7 +2,7 @@ import { TTaskArray } from '../../types/table';
 
 // header
 export const headerData = [
-  { key: 'member', label: '担当者' },
+  { key: 'user', label: '担当者' },
   { key: 'projectName', label: '案件名' },
   { key: 'workContents', label: '作業内容' },
   { key: 'personDay', label: '人日' },
@@ -17,145 +17,223 @@ export const headerData = [
 export const taskListMock: TTaskArray = [
   {
     userId: 1, //unique
-    userName: '浅田',
-    data: [
-      {
-        dataId: 1,
-        projectName: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
-        ],
-        workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
-        note: '途中まで対応',
-        delete: false, //null or Date??
-      },
-      {
-        dataId: 2,
-        projectName: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
-        ],
-        workContents: '#issueを作業', //null許可
-        progress: 0.5 * 100, //serverからの数値 * 100
-        note: '途中まで対応',
-        delete: false, //null or Date??
-      },
-      {
-        dataId: 3,
-        projectName: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
-        ],
-        workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
-        note: '途中まで対応',
-        delete: false, //null or Date??
-      },
-    ],
-  },
-  {
-    userId: 112,
     userName: '吉田',
-    data: [
+    progressData: [
       {
         dataId: 1,
-        projectName: [
+        project: [
           { id: 1, project: '日経' },
           { id: 2, project: 'Knux' },
           { id: 3, project: '安心お届けナビ' },
           { id: 4, project: 'Qualtrics log' },
           { id: 5, project: 'エコファニ' },
         ],
+        selectedProjectId: 0, //projectの中に持たせても良い
         workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
         note: '途中まで対応',
         delete: false, //null or Date??
       },
       {
         dataId: 2,
-        projectName: [
+        project: [
           { id: 1, project: '日経' },
           { id: 2, project: 'Knux' },
           { id: 3, project: '安心お届けナビ' },
           { id: 4, project: 'Qualtrics log' },
           { id: 5, project: 'エコファニ' },
         ],
+        selectedProjectId: 0, //projectの中に持たせても良い
         workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
+        manDay: 2,
+        progress: 0.1, //serverからの数値 * 100
+        requester: 'test', //null許可
         note: '途中まで対応',
         delete: false, //null or Date??
       },
       {
         dataId: 3,
-        projectName: [
+        project: [
           { id: 1, project: '日経' },
           { id: 2, project: 'Knux' },
           { id: 3, project: '安心お届けナビ' },
           { id: 4, project: 'Qualtrics log' },
           { id: 5, project: 'エコファニ' },
         ],
+        selectedProjectId: 0, //projectの中に持たせても良い
         workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
+        manDay: 2,
+        progress: 1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 4,
+        project: [
+          { id: 1, project: '日経' },
+          { id: 2, project: 'Knux' },
+          { id: 3, project: '安心お届けナビ' },
+          { id: 4, project: 'Qualtrics log' },
+          { id: 5, project: 'エコファニ' },
+        ],
+        selectedProjectId: 0, //projectの中に持たせても良い
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
         note: '途中まで対応',
         delete: false, //null or Date??
       },
     ],
   },
   {
-    userId: 113,
+    userId: 2, //unique
     userName: '三上',
-    data: [
+    progressData: [
       {
         dataId: 1,
-        projectName: [
+        project: [
           { id: 1, project: '日経' },
           { id: 2, project: 'Knux' },
           { id: 3, project: '安心お届けナビ' },
           { id: 4, project: 'Qualtrics log' },
           { id: 5, project: 'エコファニ' },
         ],
+        selectedProjectId: 0, //projectの中に持たせても良い
         workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
         note: '途中まで対応',
         delete: false, //null or Date??
       },
       {
         dataId: 2,
-        projectName: [
+        project: [
           { id: 1, project: '日経' },
           { id: 2, project: 'Knux' },
           { id: 3, project: '安心お届けナビ' },
           { id: 4, project: 'Qualtrics log' },
           { id: 5, project: 'エコファニ' },
         ],
+        selectedProjectId: 0, //projectの中に持たせても良い
         workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
+        manDay: 2,
+        progress: 0.1, //serverからの数値 * 100
+        requester: 'test', //null許可
         note: '途中まで対応',
         delete: false, //null or Date??
       },
       {
         dataId: 3,
-        projectName: [
+        project: [
           { id: 1, project: '日経' },
           { id: 2, project: 'Knux' },
           { id: 3, project: '安心お届けナビ' },
           { id: 4, project: 'Qualtrics log' },
           { id: 5, project: 'エコファニ' },
         ],
+        selectedProjectId: 0, //projectの中に持たせても良い
         workContents: '#issueを作業', //null許可
-        progress: 0.5, //serverからの数値 * 100
+        manDay: 2,
+        progress: 1, //serverからの数値 * 100
+        requester: 'test', //null許可
         note: '途中まで対応',
         delete: false, //null or Date??
+      },
+      {
+        dataId: 4,
+        project: [
+          { id: 1, project: '日経' },
+          { id: 2, project: 'Knux' },
+          { id: 3, project: '安心お届けナビ' },
+          { id: 4, project: 'Qualtrics log' },
+          { id: 5, project: 'エコファニ' },
+        ],
+        selectedProjectId: 0, //projectの中に持たせても良い
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+    ],
+  },
+  {
+    userId: 3, //unique
+    userName: '浅田',
+    progressData: [
+      {
+        dataId: 1,
+        project: [
+          { id: 1, project: '日経' },
+          { id: 2, project: 'Knux' },
+          { id: 3, project: '安心お届けナビ' },
+          { id: 4, project: 'Qualtrics log' },
+          { id: 5, project: 'エコファニ' },
+        ],
+        selectedProjectId: 0, //projectの中に持たせても良い
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 2,
+        project: [
+          { id: 1, project: '日経' },
+          { id: 2, project: 'Knux' },
+          { id: 3, project: '安心お届けナビ' },
+          { id: 4, project: 'Qualtrics log' },
+          { id: 5, project: 'エコファニ' },
+        ],
+        selectedProjectId: 0, //projectの中に持たせても良い
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 3,
+        project: [
+          { id: 1, project: '日経' },
+          { id: 2, project: 'Knux' },
+          { id: 3, project: '安心お届けナビ' },
+          { id: 4, project: 'Qualtrics log' },
+          { id: 5, project: 'エコファニ' },
+        ],
+        selectedProjectId: 0, //projectの中に持たせても良い
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 4,
+        project: [
+          { id: 1, project: '日経' },
+          { id: 2, project: 'Knux' },
+          { id: 3, project: '安心お届けナビ' },
+          { id: 4, project: 'Qualtrics log' },
+          { id: 5, project: 'エコファニ' },
+        ],
+        selectedProjectId: 0, //projectの中に持たせても良い
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: true, //null or Date??
       },
     ],
   },
