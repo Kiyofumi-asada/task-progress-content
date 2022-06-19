@@ -3,7 +3,8 @@ import { CSVDownload } from 'react-csv';
 import { headerData } from '../../helper/table-header';
 import TableBody from './table-body';
 import TableHeader from './table-header';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
 const Content: React.FC = () => {
   const rowData = [
     {
@@ -20,10 +21,14 @@ const Content: React.FC = () => {
   return (
     <div className="flex h-screen w-screen text-gray-700">
       <div className="flex flex-grow flex-col">
-        <div className="flex h-6 flex-shrink-0 items-center border-b border-gray-300">
-          Download
-          <CSVDownload headers={headerData} data={rowData} target="_blank" />
+        {/* csv start 不要なら削除*/}
+        <div className=" flex h-6 border-b border-gray-300">
+          <div className="absolute top-0 right-1 cursor-pointer">
+            <FontAwesomeIcon icon={faFileCsv} />
+            <CSVDownload headers={headerData} data={rowData} target="_blank" />
+          </div>
         </div>
+        {/* end */}
         <div className="flex flex-grow flex-col ">
           <table className="table-auto">
             <TableHeader headerData={headerData} />
