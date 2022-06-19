@@ -5,14 +5,14 @@ import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import { fromPairs } from 'ramda';
 import { CSVLink } from 'react-csv';
-import { THeaderData } from '../../../types/table-header';
+import { THeaderData } from '../../../types/table';
 
 type TProps = {
   headerData: THeaderData;
 };
 const rowData = [
   {
-    member: 'asada',
+    user: 'asada',
     projectName: ['nikkei'],
     workContents: '#1234 issue対応',
     personDay: '1.0',
@@ -31,7 +31,7 @@ const TableHeader: React.FC<TProps> = ({ headerData }) => {
   return (
     <thead className="table-fixed bg-slate-400">
       <tr>
-        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.member}</th>
+        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.user}</th>
         <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.projectName}</th>
         <th className="w-5/12 border-2 border-solid py-2 text-xs">{header.workContents}</th>
         <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.personDay}</th>

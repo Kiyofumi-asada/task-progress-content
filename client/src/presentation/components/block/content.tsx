@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TableHeader from './table-header';
 import TableBody from './table-body';
-import { headerData } from '../../helper/table-header';
+import { headerData } from '../../helper/table';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTaskList } from '../../../redux/slice';
+import { fetchTaskList } from '../../../api';
 
 const Content: React.FC = () => {
+  const taskDataList = useSelector(selectTaskList);
+  console.log(taskDataList);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTaskList() as any);
+  }, [dispatch]);
+
   return (
     <div className="flex h-screen w-screen text-gray-800">
       <div className="flex flex-grow">

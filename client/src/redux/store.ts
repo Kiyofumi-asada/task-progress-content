@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import chatReducer from './slice';
+import taskReducer from './slice';
 
 export const store = configureStore({
   reducer: {
-    chat: chatReducer,
+    task: taskReducer,
   },
 });
 

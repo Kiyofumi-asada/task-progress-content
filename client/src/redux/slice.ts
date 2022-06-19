@@ -1,38 +1,36 @@
 /* eslint-disable max-lines-per-function */
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { deleteChatData, postChatData, putChatData } from '../api';
+import { TInitialState } from '../types/table';
+import { fetchTaskList, postTaskData, putTaskData, deleteTaskData } from '../api';
 
-const initialState: any = {
-  isLoading: false,
-  status: 200,
-  chatList: [],
+const initialState: TInitialState = {
+  taskList: [],
 };
 
 // CreateSlice
-const chatSlice = createSlice({
-  name: 'chat',
+const taskSlice = createSlice({
+  name: 'task',
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // // GET
-    // builder.addCase(fetchGetChatList.fulfilled, (state, action) => {
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     status: action.payload.status,
-    //     chatList: action.payload.data,
-    //   };
-    // });
-    // builder.addCase(fetchGetChatList.rejected, (state) => {
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     chatList: initialState.chatList,
-    //   };
-    // });
+    // GET
+    builder.addCase(fetchTaskList.fulfilled, (state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        chatList: action.payload,
+      };
+    });
+    builder.addCase(fetchTaskList.rejected, (state) => {
+      return {
+        ...state,
+        isLoading: false,
+        chatList: initialState.taskList,
+      };
+    });
     // POST
-    builder.addCase(postChatData.fulfilled, (state, action) => {
+    builder.addCase(postTaskData.fulfilled, (state, action) => {
       return {
         ...state,
         isLoading: false,
@@ -40,15 +38,15 @@ const chatSlice = createSlice({
         chatList: action.payload.data,
       };
     });
-    builder.addCase(postChatData.rejected, (state) => {
+    builder.addCase(postTaskData.rejected, (state) => {
       return {
         ...state,
         isLoading: false,
-        chatList: initialState.chatList,
+        chatList: initialState.taskList,
       };
     });
     // PUT
-    builder.addCase(putChatData.fulfilled, (state, action) => {
+    builder.addCase(putTaskData.fulfilled, (state, action) => {
       return {
         ...state,
         isLoading: false,
@@ -56,15 +54,15 @@ const chatSlice = createSlice({
         chatList: action.payload.data,
       };
     });
-    builder.addCase(putChatData.rejected, (state) => {
+    builder.addCase(putTaskData.rejected, (state) => {
       return {
         ...state,
         isLoading: false,
-        chatList: initialState.chatList,
+        chatList: initialState.taskList,
       };
     });
     // DELETE
-    builder.addCase(deleteChatData.fulfilled, (state, action) => {
+    builder.addCase(deleteTaskData.fulfilled, (state, action) => {
       return {
         ...state,
         isLoading: false,
@@ -72,17 +70,17 @@ const chatSlice = createSlice({
         chatList: action.payload.data,
       };
     });
-    builder.addCase(deleteChatData.rejected, (state) => {
+    builder.addCase(deleteTaskData.rejected, (state) => {
       return {
         ...state,
         isLoading: false,
-        chatList: initialState.chatList,
+        chatList: initialState.taskList,
       };
     });
   },
 });
 
-export default chatSlice.reducer;
+export default taskSlice.reducer;
 
 // Selector
-export const selectChatList = (state: RootState) => state.chat.chatList;
+export const selectTaskList = (state: RootState) => state.task.taskList;
