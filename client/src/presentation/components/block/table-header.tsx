@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import { fromPairs } from 'ramda';
-import React from 'react';
 import { CSVLink } from 'react-csv';
 import { THeaderData } from '../../../types/table-header';
 
@@ -26,21 +26,21 @@ const TableHeader: React.FC<TProps> = ({ headerData }) => {
   const pair = headerData.map((header) => Object.values(header) as any);
   const header = fromPairs(pair) as any;
 
-  const today = format(new Date(), 'yyyy/MM/dd');
+  const today = format(new Date(), 'yyyyMMdd');
 
   return (
-    <thead className="table-fixed bg-blue-300">
+    <thead className="table-fixed bg-slate-400">
       <tr>
-        <th className="w-1/12 border-x-2 py-2 text-xs">{header.member}</th>
-        <th className="w-1/12 border-x-2 py-2 text-xs">{header.projectName}</th>
-        <th className="w-4/12 border-x-2 py-2 text-xs">{header.workContents}</th>
-        <th className="w-1/12 border-x-2 py-2 text-xs">{header.personDay}</th>
-        <th className="w-1/12 border-x-2 py-2 text-xs">{header.requester}</th>
-        <th className="w-1/12 border-x-2 py-2 text-xs">{header.progress}</th>
-        <th className="w-2/12 border-x-2 py-2 text-xs">{header.note}</th>
-        <th className="w-1/12 border-x-2 py-2 text-xs">{header.delete}</th>
-        <th className="w-1/12 border-x-2 py-2 text-xs">
-          <div className=" cursor-pointer text-2xl">
+        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.member}</th>
+        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.projectName}</th>
+        <th className="w-5/12 border-2 border-solid py-2 text-xs">{header.workContents}</th>
+        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.personDay}</th>
+        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.requester}</th>
+        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.progress}</th>
+        <th className="w-3/12 border-2 border-solid py-2 text-xs">{header.note}</th>
+        <th className="border-2 border-solid py-2 text-xs">{header.delete}</th>
+        <th className="border-2 border-solid py-2 text-xs">
+          <div className="cursor-pointer text-sm hover:text-blue-700">
             <CSVLink filename={`task_progress_${today}.csv`} data={rowData} headers={headerData}>
               <FontAwesomeIcon icon={faFileCsv} />
             </CSVLink>
