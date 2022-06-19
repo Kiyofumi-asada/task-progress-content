@@ -1,6 +1,6 @@
 import React from 'react';
 import { HotKeys } from 'react-hotkeys';
-import Main from './components/main';
+import Content from './presentation/components/block/content';
 
 const App: React.FC = () => {
   const hotKeyMap = {
@@ -16,7 +16,7 @@ const App: React.FC = () => {
   };
   return (
     <HotKeys keyMap={hotKeyMap} handlers={hotKeyHandlers}>
-      <Main />
+      <Content />
     </HotKeys>
   );
 };

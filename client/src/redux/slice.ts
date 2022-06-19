@@ -1,10 +1,9 @@
 /* eslint-disable max-lines-per-function */
 import { createSlice } from '@reduxjs/toolkit';
-import { ChatState } from '../types/chat';
 import { RootState } from './store';
-import { deleteChatData, fetchGetChatList, postChatData, putChatData } from '../api';
+import { deleteChatData, postChatData, putChatData } from '../api';
 
-const initialState: ChatState = {
+const initialState: any = {
   isLoading: false,
   status: 200,
   chatList: [],
@@ -16,22 +15,22 @@ const chatSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // GET
-    builder.addCase(fetchGetChatList.fulfilled, (state, action) => {
-      return {
-        ...state,
-        isLoading: false,
-        status: action.payload.status,
-        chatList: action.payload.data,
-      };
-    });
-    builder.addCase(fetchGetChatList.rejected, (state) => {
-      return {
-        ...state,
-        isLoading: false,
-        chatList: initialState.chatList,
-      };
-    });
+    // // GET
+    // builder.addCase(fetchGetChatList.fulfilled, (state, action) => {
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     status: action.payload.status,
+    //     chatList: action.payload.data,
+    //   };
+    // });
+    // builder.addCase(fetchGetChatList.rejected, (state) => {
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     chatList: initialState.chatList,
+    //   };
+    // });
     // POST
     builder.addCase(postChatData.fulfilled, (state, action) => {
       return {
