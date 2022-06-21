@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { TTask } from '../../../types/table';
-import { deleteTaskData } from '../../../api';
 import { useDispatch } from 'react-redux';
 
 type TProps = {
@@ -12,27 +11,44 @@ type TProps = {
 const TableBody: React.FC<TProps> = ({ data }) => {
   //TODO: rowSpanを入れた際のmap処理を修正
   const [rowSpan, setRowSpan] = useState<number>(100);
+  const [defaultSelectId, setDefaultSelectId] = useState<number>(-1);
   const dispatch = useDispatch;
   const convertProgressInt2percent = (v: number): number => v * 100;
-  const handleDelete = (e: any) => {
+  const selectedOption = (optionId: any) => {
+    //TODO: ---の初期値に戻せる必要がある
+    const setId = optionId;
+    setDefaultSelectId(setId);
+  };
+  const handleDelete = () => {
+    //TODO: delete機能実装
     console.log();
-    // dispatch(deleteTaskData(1) as any);
   };
 
   return (
     <tbody>
       {data.progressData?.map((v) => (
         <tr key={v.dataId}>
-          {/*deleteがtrueの場合非表示*/}
+          {/*deleteがtrueの場合の表示・非表示*/}
           {v.delete ? null : (
             <>
-              {/* progressが100%の場合グレーアウト*/}
+              {/* progressが100%の場合グレーアウト add bg-gray-300 */}
               {convertProgressInt2percent(v.progress) === 100 ? (
                 <>
                   <td rowSpan={1} className="flex-none border py-1 text-center text-xs">
                     {data.userName}
                   </td>
-                  <td className="flex-none border bg-gray-300 py-1 text-xs"></td>
+                  <td className="flex-none border bg-gray-300 py-1 text-xs">
+                    <label>
+                      <select defaultValue={v.selectedOptionId} onChange={(e): void => selectedOption(e.target.value)}>
+                        <option value={defaultSelectId}>---</option>
+                        {v.options.map((option) => (
+                          <option defaultValue={v.selectedOptionId} key={option.id} value={option.id}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </td>
                   <td className="flex-none border bg-gray-300 px-1 py-1 text-xs">{v.workContents}</td>
                   <td className="flex-none border bg-gray-300 py-1 text-center text-xs">{v.manDay}</td>
                   <td className="flex-none border bg-gray-300 py-1 text-center text-xs">{v.requester}</td>
@@ -42,8 +58,8 @@ const TableBody: React.FC<TProps> = ({ data }) => {
                   <td className="flex-none border bg-gray-300 px-1 py-1 text-xs">{v.note}</td>
                   <td className="flex-none border bg-gray-300 py-1 text-center text-xs">
                     <div
-                      className="cursor-pointer bg-gray-300 px-2 py-1 text-red-600"
-                      onClick={(e) => handleDelete(e.target)}
+                      className="cursor-pointer bg-gray-300 px-2 py-1 hover:text-red-600"
+                      onClick={() => handleDelete()}
                     >
                       <FontAwesomeIcon icon={faTrashCan} />
                     </div>
@@ -54,7 +70,18 @@ const TableBody: React.FC<TProps> = ({ data }) => {
                   <td rowSpan={1} className="flex-none border py-1 text-center text-xs">
                     {data.userName}
                   </td>
-                  <td className="flex-none border py-1 text-xs"></td>
+                  <td className="flex-none border py-1 text-xs">
+                    <label>
+                      <select defaultValue={v.selectedOptionId} onChange={(e): void => selectedOption(e.target.value)}>
+                        <option value={defaultSelectId}>---</option>
+                        {v.options.map((option) => (
+                          <option defaultValue={v.selectedOptionId} key={option.id} value={option.id}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </td>
                   <td className="flex-none border px-1 py-1 text-xs">{v.workContents}</td>
                   <td className="flex-none border py-1 text-center text-xs">{v.manDay}</td>
                   <td className="flex-none border py-1 text-center text-xs">{v.requester}</td>
@@ -63,7 +90,7 @@ const TableBody: React.FC<TProps> = ({ data }) => {
                   </td>
                   <td className="flex-none border px-1 py-1 text-xs">{v.note}</td>
                   <td className="flex-none border py-1 text-center text-xs">
-                    <div className="cursor-pointer px-2 py-1 hover:text-red-600" onClick={(e) => handleDelete(e)}>
+                    <div className="cursor-pointer px-2 py-1 hover:text-red-600" onClick={() => handleDelete()}>
                       <FontAwesomeIcon icon={faTrashCan} />
                     </div>
                   </td>

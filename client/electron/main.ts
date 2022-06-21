@@ -4,7 +4,7 @@ import * as path from 'path';
 const isLocal = process.env.REACT_APP_IS_LOCAL;
 
 let win: BrowserWindow | null = null;
-function createWindow() {
+const createWindow = () => {
   win = new BrowserWindow({
     fullscreen: true,
     width: 1500,
@@ -30,7 +30,7 @@ function createWindow() {
     });
   }
   win.on('closed', () => (win = null));
-}
+};
 
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {

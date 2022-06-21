@@ -17,18 +17,16 @@ export const headerData = [
 export const taskListMock: TTaskArray = [
   {
     userId: 1, //unique
-    userName: '吉田',
+    userName: 'hoge',
     progressData: [
       {
         dataId: 1,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: -1, //初期値 -1
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.99, //serverからの数値 * 100
@@ -38,14 +36,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 2,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.1, //serverからの数値 * 100
@@ -55,14 +51,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 3,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 1, //serverからの数値 * 100
@@ -72,14 +66,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 4,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.99, //serverからの数値 * 100
@@ -91,18 +83,16 @@ export const taskListMock: TTaskArray = [
   },
   {
     userId: 2, //unique
-    userName: '三上',
+    userName: 'huga',
     progressData: [
       {
         dataId: 1,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.99, //serverからの数値 * 100
@@ -112,14 +102,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 2,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 0,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.1, //serverからの数値 * 100
@@ -129,14 +117,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 3,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 1, //serverからの数値 * 100
@@ -146,14 +132,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 4,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 2,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.99, //serverからの数値 * 100
@@ -165,18 +149,16 @@ export const taskListMock: TTaskArray = [
   },
   {
     userId: 3, //unique
-    userName: '浅田',
+    userName: 'piyo',
     progressData: [
       {
         dataId: 1,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.99, //serverからの数値 * 100
@@ -186,14 +168,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 2,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.1, //serverからの数値 * 100
@@ -203,14 +183,12 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 3,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 1, //serverからの数値 * 100
@@ -220,14 +198,210 @@ export const taskListMock: TTaskArray = [
       },
       {
         dataId: 4,
-        project: [
-          { id: 1, project: '日経' },
-          { id: 2, project: 'Knux' },
-          { id: 3, project: '安心お届けナビ' },
-          { id: 4, project: 'Qualtrics log' },
-          { id: 5, project: 'エコファニ' },
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
         ],
-        selectedProjectId: 0, //projectの中に持たせても良い
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: true, //null or Date??
+      },
+    ],
+  },
+  {
+    userId: 4, //unique
+    userName: 'hoge',
+    progressData: [
+      {
+        dataId: 1,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 2,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 3,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 4,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+    ],
+  },
+  {
+    userId: 5, //unique
+    userName: 'huga',
+    progressData: [
+      {
+        dataId: 1,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 2,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 3,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 4,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+    ],
+  },
+  {
+    userId: 6, //unique
+    userName: 'piyo',
+    progressData: [
+      {
+        dataId: 1,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 1,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.99, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 2,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 0,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 0.1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 3,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 0,
+        workContents: '#issueを作業', //null許可
+        manDay: 2,
+        progress: 1, //serverからの数値 * 100
+        requester: 'test', //null許可
+        note: '途中まで対応',
+        delete: false, //null or Date??
+      },
+      {
+        dataId: 4,
+        options: [
+          { id: 0, label: '値1' },
+          { id: 1, label: '値2' },
+          { id: 2, label: '値3' },
+        ],
+        selectedOptionId: 0,
         workContents: '#issueを作業', //null許可
         manDay: 2,
         progress: 0.99, //serverからの数値 * 100

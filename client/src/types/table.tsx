@@ -10,8 +10,8 @@ export type TTask = {
   userName: string;
   progressData?: {
     dataId?: number;
-    project?: { id: number; project: string }[];
-    selectedProjectId?: number;
+    options: { id: number; label: string }[];
+    selectedOptionId: number;
     workContents?: string; //TODO:null許可
     manDay?: number; //TODO:null許可
     progress: number;
