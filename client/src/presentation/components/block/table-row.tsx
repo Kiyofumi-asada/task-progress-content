@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { TProgressData, TTaskList } from '../../../types/table';
+import { TProgressData, TRequestProgressData, TTaskList } from '../../../types/table';
 import { useDispatch } from 'react-redux';
+import { postTaskData, putTaskData } from '../../../api';
 
 type TProps = {
   dataList: TTaskList;
   data: TProgressData;
 };
 const TableRow: React.FC<TProps> = ({ dataList, data }) => {
-  const [defaultSelectId, setDefaultSelectId] = useState<number>(-1);
+  const dispatch = useDispatch();
+  const [selectOptionId, setSelectOptionId] = useState<number>(-1);
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
   const workContentsRef = React.useRef<HTMLInputElement>(null);
   const manDayRef = React.useRef<HTMLInputElement>(null);
@@ -20,23 +22,30 @@ const TableRow: React.FC<TProps> = ({ dataList, data }) => {
   const convertProgress = (progress: number): number => progress * 100;
   const isAchieve = (int: number): boolean => 100 <= convertProgress(int);
 
-  const selectedOption = (id: string) => {
-    const setId = Number(id);
-    setDefaultSelectId(setId);
-  };
+  const selectedOption = (id: string) => setSelectOptionId(Number(id));
 
   const handleSave = () => {
-    console.log('workContentsRef', workContentsRef.current?.value);
-    console.log('manDayRef', manDayRef.current?.value);
-    console.log('requesterRef', requesterRef.current?.value);
-    console.log('progressRef', progressRef.current?.value);
-    console.log('noteRef', noteRef.current?.value);
+    // + ボタンから追加した場合はpost,そうでない場合はput
+    const body: TRequestProgressData = {
+      userId: dataList.userId,
+      userName: dataList.userName,
+      progressData: {
+        dataId: data.dataId,
+        selectedOptionId: selectOptionId, //初期値 -1
+        workContents: workContentsRef.current?.value, //null許可
+        manDay: Number(manDayRef.current?.value),
+        requester: requesterRef.current?.value, //null許可
+        progress: Number(progressRef.current?.value), //serverからの数値 * 100
+        note: noteRef.current?.value,
+      },
+    };
+    dispatch(putTaskData(body) as any);
   };
+
   const handleDelete = () => {
     return;
   };
 
-  console.log(data);
   return (
     <>
       {/* 担当者 */}
@@ -58,7 +67,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data }) => {
           defaultValue={data.selectedOptionId}
           onChange={(e): void => selectedOption(e.target.value)}
         >
-          <option value={defaultSelectId}>---</option>
+          <option value={selectOptionId}>---</option>
           {data.options.map((option) => (
             <option defaultValue={data.selectedOptionId} key={option.id} value={option.id}>
               {option.label}

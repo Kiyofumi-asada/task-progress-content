@@ -13,8 +13,9 @@ export const fetchTaskList = createAsyncThunk('task/fetchTaskList', async () => 
 
 // POST
 export const postTaskData = createAsyncThunk('task/postTaskData', async (body: any) => {
-  const { status, data } = await axios.post<any[]>(path, body);
-  return { status, data };
+  console.log('api call post', body);
+  // const { status, data } = await axios.post<any[]>(path, body);
+  // return { status, data };
 });
 // PUT
 export const putTaskData = createAsyncThunk('task/putTaskData', async (body: any) => {

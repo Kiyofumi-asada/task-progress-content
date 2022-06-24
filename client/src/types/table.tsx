@@ -17,14 +17,28 @@ export type TProgressData = {
   selectedOptionId: number;
   workContents?: string; //TODO:null許可
   manDay?: number; //TODO:null許可
-  progress: number;
   requester?: string; //TODO:null許可
+  progress: number;
   note?: string; //TODO:null許可
   delete?: boolean; //TODO:null or Date??
 };
 
-export type TTaskListArray = Array<TTaskList>;
+export type TRequestProgressData = {
+  userId: number;
+  userName: string;
+  progressData: {
+    dataId: number;
+    selectedOptionId: number;
+    workContents?: string; //TODO:null許可
+    manDay?: number; //TODO:null許可
+    requester?: string; //TODO:null許可
+    progress: number;
+    note?: string; //TODO:null許可
+  };
+};
 
+export type TPartialTaskList = Partial<TTaskList>;
+export type TTaskListArray = Array<TTaskList>;
 export type TInitialState = {
   taskList: TTaskListArray;
 };
