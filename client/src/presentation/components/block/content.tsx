@@ -20,8 +20,8 @@ const Content: React.FC = () => {
           <table className="group table-fixed">
             <TableHeader headerData={headerData} dataList={taskDataList} />
             {/* TODO:taskDataList.length が0ならデーター作成ボタン */}
-            {taskDataList.map((data) => (
-              <TableBody key={data.userId} data={data} />
+            {taskDataList.map((dataList) => (
+              <TableBody key={dataList.userId} dataList={dataList} />
             ))}
           </table>
         </div>

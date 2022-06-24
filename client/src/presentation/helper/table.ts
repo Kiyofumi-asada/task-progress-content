@@ -1,4 +1,4 @@
-import { TTaskArray } from '../../types/table';
+import { TTaskListArray } from '../../types/table';
 
 // header
 export const headerData = [
@@ -14,7 +14,7 @@ export const headerData = [
 ];
 
 // body
-export const taskListMock: TTaskArray = [
+export const taskListMock: TTaskListArray = [
   {
     userId: 1, //unique
     userName: 'hoge',

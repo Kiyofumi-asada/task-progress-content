@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import { CSVLink } from 'react-csv';
-import { THeaderData, TTaskArray } from '../../../types/table';
+import { THeaderData, TTaskListArray } from '../../../types/table';
 import { fromPairs } from 'ramda';
 type TProps = {
   headerData: THeaderData;
-  dataList: TTaskArray;
+  dataList: TTaskListArray;
 };
 
 const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
