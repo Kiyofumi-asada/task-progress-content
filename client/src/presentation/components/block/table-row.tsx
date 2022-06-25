@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { TDeleteRequestData, TProgressData, TSaveRequestData, TTaskList } from '../../../types/table';
 import { deleteTaskData, postTaskData, putTaskData } from '../../../api';
+import toast from 'react-hot-toast';
 
 type TProps = {
   dataList: TTaskList;
@@ -33,6 +34,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   /**
    * post & put api call
    */
+
   const handleSave = () => {
     if (isCreate) {
       //
@@ -139,8 +141,8 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       <td
         className={
           isAchieve(data.progress)
-            ? 'flex-none border bg-gray-300 py-1 text-center text-center text-xs'
-            : 'flex-none border py-1 text-center text-xs'
+            ? 'flex-none border bg-gray-300 text-center text-center text-xs'
+            : 'flex-none border text-center text-xs'
         }
       >
         <input
@@ -161,8 +163,8 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       <td
         className={
           isAchieve(data.progress)
-            ? 'flex-none border bg-gray-300 py-1 text-center text-xs'
-            : 'flex-none border py-1 text-center text-xs'
+            ? 'flex-none border bg-gray-300 text-center text-xs'
+            : 'flex-none border text-center text-xs'
         }
       >
         <div className="flex">
@@ -186,9 +188,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 備考 */}
       <td
         className={
-          isAchieve(data.progress)
-            ? 'flex-none border bg-gray-300 px-1 py-1 text-xs'
-            : 'flex-none border px-1 py-1 text-xs'
+          isAchieve(data.progress) ? 'flex-none border bg-gray-300 px-1 text-xs' : 'flex-none border px-1 text-xs'
         }
       >
         <input
@@ -205,15 +205,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       <td
         className={
           isAchieve(data.progress)
-            ? 'flex-none border bg-gray-300 py-1 text-center text-xs'
-            : 'flex-none border py-1 text-center text-xs'
+            ? 'flex-none border bg-gray-300 text-center text-xs'
+            : 'flex-none border text-center text-xs'
         }
       >
         <div
           className={
             isAchieve(data.progress)
-              ? 'cursor-pointer bg-gray-300 px-2 py-1 hover:text-red-600'
-              : 'cursor-pointer px-2 py-1 hover:text-red-600'
+              ? 'cursor-pointer bg-gray-300 px-2 hover:text-red-600'
+              : 'cursor-pointer px-2 hover:text-red-600'
           }
           onClick={() => handleDelete()}
         >
@@ -221,15 +221,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         </div>
       </td>
       {/* 保存 */}
-      {isFirstIdx ? (
-        <>
-          <td rowSpan={rowSpanCount} className="flex-none border px-4 py-1 text-xs">
-            <div className="cursor-pointer" onClick={handleSave}>
-              保
-            </div>
-          </td>
-        </>
-      ) : null}
+      <>
+        <td rowSpan={1} className="flex-none border px-2 text-xs">
+          <div className="cursor-pointer" onClick={handleSave}>
+            <button className="m-0 inline-block rounded bg-blue-500 px-1 py-0.5 font-bold text-white hover:bg-blue-700">
+              save
+            </button>
+          </div>
+        </td>
+      </>
     </>
   );
 };

@@ -1,23 +1,13 @@
 import React from 'react';
-import { HotKeys } from 'react-hotkeys';
+import { Toaster } from 'react-hot-toast';
 import Content from './presentation/components/block/content';
 
 const App: React.FC = () => {
-  const hotKeyMap = {
-    enterSearch: 'command+k',
-  };
-  const hotKeyHandlers = {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    enterSearch: (e: any) => {
-      e.preventDefault();
-      (document.querySelector('#postChat') as HTMLElement).focus();
-      return;
-    },
-  };
   return (
-    <HotKeys keyMap={hotKeyMap} handlers={hotKeyHandlers}>
+    <>
+      <Toaster />
       <Content />
-    </HotKeys>
+    </>
   );
 };
 
