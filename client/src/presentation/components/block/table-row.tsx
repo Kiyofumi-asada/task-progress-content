@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { TProgressData, TRequestProgressData, TTaskList } from '../../../types/table';
+import { TDeleteRequestData, TProgressData, TSaveRequestData, TTaskList } from '../../../types/table';
 import { useDispatch } from 'react-redux';
-import { postTaskData, putTaskData } from '../../../api';
+import { deleteTaskData, postTaskData, putTaskData } from '../../../api';
 
 type TProps = {
   dataList: TTaskList;
@@ -26,7 +26,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data }) => {
 
   const handleSave = () => {
     // + ボタンから追加した場合はpost,そうでない場合はput
-    const body: TRequestProgressData = {
+    const body: TSaveRequestData = {
       userId: dataList.userId,
       userName: dataList.userName,
       progressData: {
@@ -43,6 +43,8 @@ const TableRow: React.FC<TProps> = ({ dataList, data }) => {
   };
 
   const handleDelete = () => {
+    const params: TDeleteRequestData = { userId: dataList.userId, dataId: data.dataId };
+    dispatch(deleteTaskData(params) as any);
     return;
   };
 

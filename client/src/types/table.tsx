@@ -23,7 +23,7 @@ export type TProgressData = {
   delete?: boolean; //TODO:null or Date??
 };
 
-export type TRequestProgressData = {
+export type TSaveRequestData = {
   userId: number;
   userName: string;
   progressData: {
@@ -35,6 +35,10 @@ export type TRequestProgressData = {
     progress: number;
     note?: string; //TODO:null許可
   };
+};
+export type TDeleteRequestData = {
+  userId: number;
+  dataId: number;
 };
 
 export type TPartialTaskList = Partial<TTaskList>;
