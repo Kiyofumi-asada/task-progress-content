@@ -8,7 +8,7 @@ export type TPartialHeaderData = Partial<THeaderData>;
 export type TTaskList = {
   userId: number;
   userName: string;
-  progressData?: TProgressData[];
+  progressData?: TProgressData[] | [];
 };
 
 export type TProgressData = {

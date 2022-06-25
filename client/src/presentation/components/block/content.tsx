@@ -7,8 +7,13 @@ import { selectTaskList } from '../../../redux/slice';
 import { fetchTaskList } from '../../../api';
 
 const Content: React.FC = () => {
+  //react,redux
   const taskDataList = useSelector(selectTaskList);
   const dispatch = useDispatch();
+  //dispatch
+  /**
+   * get api call
+   */
   useEffect(() => {
     dispatch(fetchTaskList() as any);
   }, [dispatch]);

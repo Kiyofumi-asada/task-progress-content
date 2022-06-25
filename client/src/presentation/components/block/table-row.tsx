@@ -1,47 +1,61 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { TDeleteRequestData, TProgressData, TSaveRequestData, TTaskList } from '../../../types/table';
-import { useDispatch } from 'react-redux';
 import { deleteTaskData, postTaskData, putTaskData } from '../../../api';
 
 type TProps = {
   dataList: TTaskList;
   data: TProgressData;
+  idx: number;
 };
-const TableRow: React.FC<TProps> = ({ dataList, data }) => {
+
+const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
+  //react,redux
   const dispatch = useDispatch();
   const [selectOptionId, setSelectOptionId] = useState<number>(-1);
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
+  const [isCreate, setIsCreate] = useState<boolean>(false);
+  //prop
+  const rowSpanCount = dataList.progressData?.length ? dataList.progressData?.length + 1 : 1;
+  const isFirstIdx = idx === 0;
   const workContentsRef = React.useRef<HTMLInputElement>(null);
   const manDayRef = React.useRef<HTMLInputElement>(null);
   const requesterRef = React.useRef<HTMLInputElement>(null);
   const progressRef = React.useRef<HTMLInputElement>(null);
   const noteRef = React.useRef<HTMLInputElement>(null);
-
+  //method
   const convertProgress = (progress: number): number => progress * 100;
   const isAchieve = (int: number): boolean => 100 <= convertProgress(int);
-
   const selectedOption = (id: string) => setSelectOptionId(Number(id));
-
+  //dispatch
+  /**
+   * post & put api call
+   */
   const handleSave = () => {
-    // + ボタンから追加した場合はpost,そうでない場合はput
-    const body: TSaveRequestData = {
-      userId: dataList.userId,
-      userName: dataList.userName,
-      progressData: {
-        dataId: data.dataId,
-        selectedOptionId: selectOptionId, //初期値 -1
-        workContents: workContentsRef.current?.value, //null許可
-        manDay: Number(manDayRef.current?.value),
-        requester: requesterRef.current?.value, //null許可
-        progress: Number(progressRef.current?.value), //serverからの数値 * 100
-        note: noteRef.current?.value,
-      },
-    };
-    dispatch(putTaskData(body) as any);
+    if (isCreate) {
+      //
+    } else {
+      const body: TSaveRequestData = {
+        userId: dataList.userId,
+        userName: dataList.userName,
+        progressData: {
+          dataId: data.dataId,
+          selectedOptionId: selectOptionId,
+          workContents: workContentsRef.current?.value ?? '',
+          manDay: Number(manDayRef.current?.value) ?? 0,
+          requester: requesterRef.current?.value ?? '',
+          progress: Number(progressRef.current?.value) ?? 0,
+          note: noteRef.current?.value ?? '',
+        },
+      };
+      dispatch(putTaskData(body) as any);
+    }
   };
-
+  /**
+   * delete api call
+   */
   const handleDelete = () => {
     const params: TDeleteRequestData = { userId: dataList.userId, dataId: data.dataId };
     dispatch(deleteTaskData(params) as any);
@@ -51,9 +65,13 @@ const TableRow: React.FC<TProps> = ({ dataList, data }) => {
   return (
     <>
       {/* 担当者 */}
-      <td rowSpan={1} className="flex-none border py-1 text-center text-xs">
-        {dataList.userName}
-      </td>
+      {isFirstIdx ? (
+        <>
+          <td rowSpan={rowSpanCount} className="flex-none border py-1 text-center text-xs">
+            {dataList.userName}
+          </td>
+        </>
+      ) : null}
       {/* 案件名 */}
       <td
         className={
@@ -67,10 +85,10 @@ const TableRow: React.FC<TProps> = ({ dataList, data }) => {
               : 'h-8 w-full cursor-pointer text-center'
           }
           defaultValue={data.selectedOptionId}
-          onChange={(e): void => selectedOption(e.target.value)}
+          onChange={(event) => selectedOption(event.target.value)}
         >
           <option value={selectOptionId}>---</option>
-          {data.options.map((option) => (
+          {data.options.map((option: any) => (
             <option defaultValue={data.selectedOptionId} key={option.id} value={option.id}>
               {option.label}
             </option>
@@ -203,11 +221,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data }) => {
         </div>
       </td>
       {/* 保存 */}
-      <td rowSpan={1} className="flex-none border px-4 py-1 text-xs">
-        <div className="cursor-pointer" onClick={handleSave}>
-          保
-        </div>
-      </td>
+      {isFirstIdx ? (
+        <>
+          <td rowSpan={rowSpanCount} className="flex-none border px-4 py-1 text-xs">
+            <div className="cursor-pointer" onClick={handleSave}>
+              保
+            </div>
+          </td>
+        </>
+      ) : null}
     </>
   );
 };

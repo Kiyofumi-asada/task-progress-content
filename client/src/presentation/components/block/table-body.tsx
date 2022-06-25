@@ -8,12 +8,13 @@ import TableRow from './table-row';
 type TProps = {
   dataList: TTaskList;
 };
+
 const TableBody: React.FC<TProps> = ({ dataList }) => {
   return (
     <tbody>
-      {dataList.progressData?.map((data) => (
+      {dataList.progressData?.map((data, idx) => (
         <tr key={data.dataId}>
-          <TableRow dataList={dataList} data={data} />
+          <TableRow dataList={dataList} data={data} idx={idx} />
         </tr>
       ))}
 
