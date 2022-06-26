@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postTaskData } from '../../api';
 import { TRequestData } from '../../types/table';
@@ -11,8 +11,10 @@ type TProps = {
 const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
   //react,redux
   const dispatch = useDispatch();
+  const [inputText, setInputText] = useState<string>('');
   //variable
   const userNameRef = React.useRef<HTMLInputElement>(null);
+  const isDisabled = inputText.length ? false : true;
   //function
   const handleCreateNewUser = () => {
     const body: TRequestData = {
@@ -40,24 +42,27 @@ const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
                   <div className="m-20">
                     <form action="" className="">
                       <div className="mb-6">
-                        <div className="mb-2 flex justify-between">
-                          <label htmlFor="url" className="text-sm text-gray-600 dark:text-gray-400">
-                            担当者名
-                          </label>
-                        </div>
                         <input
-                          className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100 "
+                          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100 "
                           type="text"
                           name="title"
                           id="url"
-                          placeholder=""
-                          ref={userNameRef}
+                          placeholder="担当者名"
+                          value={inputText}
+                          onChange={(e) => {
+                            setInputText(e.target.value);
+                          }}
                         />
                       </div>
                       <div className="mb-2">
                         <button
                           type="button"
-                          className="float-right mb-8 ml-4 mt-3 rounded bg-blue-500 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:bg-blue-700 hover:shadow-lg focus:outline-none"
+                          className={
+                            isDisabled
+                              ? 'float-right mb-8 ml-4 mt-3 rounded bg-gray-400 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none  focus:outline-none'
+                              : 'float-right mb-8 ml-4 mt-3 rounded bg-blue-500 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:bg-blue-700 hover:shadow-lg focus:outline-none'
+                          }
+                          disabled={isDisabled}
                           onClick={handleCreateNewUser}
                         >
                           保存
