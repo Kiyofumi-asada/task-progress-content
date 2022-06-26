@@ -1,4 +1,4 @@
-import { TTaskListArray } from '../../types/table';
+import { TRequestData, TTaskListArray } from '../../types/table';
 
 // header
 export const headerData = [
@@ -14,6 +14,20 @@ export const headerData = [
 ];
 
 // body
+export const initialCreateNewRowData: TRequestData = {
+  userId: 1,
+  userName: '名前',
+  progressData: {
+    selectedOptionId: -1,
+    workContents: '',
+    manDay: 0,
+    requester: '',
+    progress: 0,
+    note: '',
+  },
+};
+
+//TODO:開発完了後削除
 export const taskListMock: TTaskListArray = [
   {
     userId: 1, //unique

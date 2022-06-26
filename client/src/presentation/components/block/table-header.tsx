@@ -12,7 +12,7 @@ type TProps = {
 };
 
 const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
-  //prop
+  //variable
   const pair = headerData.map((header) => Object.values(header) as any);
   const header = fromPairs(pair) as any;
   const today = format(new Date(), 'yyyyMMdd');

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TableHeader from './table-header';
 import TableBody from './table-body';
 import { headerData } from '../../helper/table';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectTaskList } from '../../../redux/slice';
 import { fetchTaskList } from '../../../api';
 
 const Content: React.FC = () => {
   //react,redux
-  const taskDataList = useSelector(selectTaskList);
   const dispatch = useDispatch();
+  const taskDataList = useSelector(selectTaskList);
   //dispatch
   /**
    * get api call
