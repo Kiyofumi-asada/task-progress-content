@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
+import { fromPairs } from 'ramda';
 import { CSVLink } from 'react-csv';
 import { THeaderData, TTaskListArray } from '../../types/table';
-import { fromPairs } from 'ramda';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
+
 type TProps = {
   headerData: THeaderData;
   dataList: TTaskListArray;
 };
 
 const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
-  console.log(dataList);
   //variable
   const pair = headerData.map((header) => Object.values(header) as any);
   const header = fromPairs(pair) as any;
