@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postTaskData } from '../../api';
+import { postUserData } from '../../api';
 import { TRequestData } from '../../types/table';
 import { initialCreateNewUser } from '../helper/table';
 
@@ -21,7 +21,7 @@ const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
       ...initialCreateNewUser,
       userName: userNameRef.current?.value ?? '',
     };
-    dispatch(postTaskData(body) as any);
+    dispatch(postUserData(body) as any);
     setIsModalOpen(false);
   };
 

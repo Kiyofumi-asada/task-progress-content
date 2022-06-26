@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { taskListMock } from '../presentation/helper/table';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const path = 'task';
 
@@ -39,7 +39,6 @@ export const postUserData = createAsyncThunk('task/postUserData', async (body: a
 //put
 export const putTaskData = createAsyncThunk('task/putTaskData', async (body: any) => {
   console.log('api call put', body);
-
   toast.success('保存しました', {
     style: { fontSize: ' 0.8em' },
   });
@@ -52,7 +51,7 @@ export const putTaskData = createAsyncThunk('task/putTaskData', async (body: any
 //delete
 export const deleteTaskData = createAsyncThunk('task/deleteTaskData', async (params: any) => {
   const { userId, dataId } = params;
-  const deletePath = `${path}/${userId}/${dataId}`;
+  const deletePath = `${path}?userId=${userId}&dataId=${dataId}`;
   console.log('api call delete', deletePath);
   toast.success('削除しました', {
     style: { fontSize: ' 0.8em' },

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TRequestData, TTaskList } from '../../types/table';
 import TableRow from './table-row';
-import { postUserData } from '../../api';
+import { postTaskData } from '../../api';
 import { initialCreateNewRow } from '../helper/table';
 
 type TProps = {
@@ -24,7 +24,7 @@ const TableBody: React.FC<TProps> = ({ dataList }) => {
       userId: dataList.userId,
       userName: dataList.userName,
     };
-    dispatch(postUserData(body) as any);
+    dispatch(postTaskData(body) as any);
   };
 
   return (
