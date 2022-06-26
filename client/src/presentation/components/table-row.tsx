@@ -61,7 +61,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 担当者 */}
       {isFirstIdx ? (
         <>
-          <td rowSpan={rowSpanCount} className="flex-none border py-1 text-center text-xs">
+          <td rowSpan={rowSpanCount} className="flex-none border py-0 text-center text-xs">
             {dataList.userName}
           </td>
         </>
@@ -69,7 +69,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 案件名 */}
       <td
         className={
-          isAchieve(data.progress) ? 'flex-none border bg-gray-300 py-1 text-xs' : 'flex-none border py-1 text-xs'
+          isAchieve(data.progress) ? 'flex-none border bg-gray-300 py-0 text-xs' : 'flex-none border py-0 text-xs'
         }
       >
         <select
@@ -93,8 +93,8 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       <td
         className={
           isAchieve(data.progress)
-            ? 'flex-none border bg-gray-300 px-1 py-1 text-xs'
-            : 'flex-none border px-1 py-1 text-xs'
+            ? 'flex-none border bg-gray-300 px-1 py-0 text-xs'
+            : 'flex-none border px-1 py-0 text-xs'
         }
       >
         <input
@@ -111,8 +111,8 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       <td
         className={
           isAchieve(data.progress)
-            ? 'flex-none border bg-gray-300 py-1 text-center text-xs'
-            : 'flex-none border py-1 text-center text-xs'
+            ? 'flex-none border bg-gray-300 py-0 text-center text-xs'
+            : 'flex-none border py-0 text-center text-xs'
         }
       >
         <input
@@ -217,7 +217,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         <td rowSpan={1} className="flex-none border px-2 text-xs">
           <div className="cursor-pointer" onClick={handleSave}>
             <button className="inline-block rounded-sm bg-blue-500 px-1 py-0.5 text-xs font-bold text-white hover:bg-blue-700">
-              保存
+              save
             </button>
           </div>
         </td>

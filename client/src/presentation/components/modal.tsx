@@ -43,7 +43,7 @@ const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
                     <form action="" className="">
                       <div className="mb-6">
                         <input
-                          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100 "
+                          className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100"
                           type="text"
                           name="title"
                           id="url"
@@ -59,7 +59,7 @@ const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
                           type="button"
                           className={
                             isDisabled
-                              ? 'float-right mb-8 ml-4 mt-3 rounded bg-gray-400 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none  focus:outline-none'
+                              ? 'float-right mb-8 ml-4 mt-3 rounded bg-gray-400 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none focus:outline-none'
                               : 'float-right mb-8 ml-4 mt-3 rounded bg-blue-500 px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none hover:bg-blue-700 hover:shadow-lg focus:outline-none'
                           }
                           disabled={isDisabled}

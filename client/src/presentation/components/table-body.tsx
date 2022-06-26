@@ -35,8 +35,8 @@ const TableBody: React.FC<TProps> = ({ dataList }) => {
         </tr>
       ))}
       <tr className="border-b-2 border-b-gray-800">
-        <td colSpan={9} className="flex-none border py-0 text-center text-lg hover:bg-gray-100">
-          <div className=" cursor-pointer" onClick={() => handleCreateNewRow(dataList)}>
+        <td colSpan={9} className="flex-none border text-center hover:bg-gray-100">
+          <div className="cursor-pointer" onClick={() => handleCreateNewRow(dataList)}>
             <FontAwesomeIcon icon={faPlus} />
           </div>
         </td>

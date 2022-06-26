@@ -12,6 +12,7 @@ type TProps = {
 };
 
 const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
+  console.log(dataList);
   //variable
   const pair = headerData.map((header) => Object.values(header) as any);
   const header = fromPairs(pair) as any;
@@ -20,20 +21,20 @@ const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
   return (
     <thead className="table-fixed bg-slate-900 text-white">
       <tr>
-        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.user}</th>
-        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.projectName}</th>
-        <th className="w-5/12 border-2 border-solid py-2 text-xs">{header.workContents}</th>
-        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.personDay}</th>
-        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.requester}</th>
-        <th className="w-1/12 border-2 border-solid py-2 text-xs">{header.progress}</th>
-        <th className="w-3/12 border-2 border-solid py-2 text-xs">{header.note}</th>
-        <th className="border-2 border-solid py-2 text-xs">{header.delete}</th>
-        <th className="w-1/12 border-2 border-solid py-2 text-xs">
+        <th className="w-1/12 border-2 border-solid py-1 text-xs">{header.user}</th>
+        <th className="w-1/12 border-2 border-solid py-1 text-xs">{header.projectName}</th>
+        <th className="w-5/12 border-2 border-solid py-1 text-xs">{header.workContents}</th>
+        <th className="w-1/12 border-2 border-solid py-1 text-xs">{header.personDay}</th>
+        <th className="w-1/12 border-2 border-solid py-1 text-xs">{header.requester}</th>
+        <th className="w-1/12 border-2 border-solid py-1 text-xs">{header.progress}</th>
+        <th className="w-3/12 border-2 border-solid py-1 text-xs">{header.note}</th>
+        <th className="border-2 border-solid py-1 text-xs">{header.delete}</th>
+        <th className="w-1/12 border-2 border-solid py-1 text-xs">
           <div className="cursor-pointer text-sm hover:text-blue-700">
-            {/* TODO:CSV機能を使えるよう修正する */}
+            {/* csv機能追加時に実装
             <CSVLink filename={`task_progress_${today}.csv`} data={dataList} headers={headerData}>
               <FontAwesomeIcon icon={faFileArrowDown} />
-            </CSVLink>
+            </CSVLink> */}
           </div>
         </th>
       </tr>
