@@ -1,7 +1,7 @@
-import { TRequestData, TTaskListArray } from '../../types/table';
+import { THeaderData, TRequestData, TTaskListArray } from '../../types/table';
 
 // header
-export const headerData = [
+export const headerData: THeaderData = [
   { key: 'user', label: '担当者' },
   { key: 'projectName', label: '案件名' },
   { key: 'workContents', label: '作業内容' },
@@ -14,9 +14,21 @@ export const headerData = [
 ];
 
 // body
-export const initialCreateNewRowData: TRequestData = {
+export const initialCreateNewUser: TRequestData = {
+  userName: '',
+  progressData: {
+    selectedOptionId: -1,
+    workContents: '',
+    manDay: 0,
+    requester: '',
+    progress: 0,
+    note: '',
+  },
+};
+
+export const initialCreateNewRow: TRequestData = {
   userId: 1,
-  userName: '名前',
+  userName: '',
   progressData: {
     selectedOptionId: -1,
     workContents: '',
@@ -115,10 +127,5 @@ export const taskListMock: TTaskListArray = [
         delete: false, //null or Date??
       },
     ],
-  },
-  {
-    userId: 3, //unique
-    userName: 'piyo',
-    progressData: [],
   },
 ];

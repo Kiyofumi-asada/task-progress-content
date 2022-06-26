@@ -15,9 +15,9 @@ export const fetchTaskList = createAsyncThunk('task/fetchTaskList', async () => 
 // POST
 export const postTaskData = createAsyncThunk('task/postTaskData', async (body: any) => {
   console.log('api call post', body);
-  toast.success('保存しました', {
-    style: { fontSize: ' 0.8em' },
-  });
+  // toast.success('保存しました', {
+  //   style: { fontSize: ' 0.8em' },
+  // });
   // toast.error('保存に失敗しました', {
   //   style: { fontSize: ' 0.8em' },
   // });

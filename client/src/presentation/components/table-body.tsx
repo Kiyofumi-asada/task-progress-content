@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { TRequestData, TTaskList } from '../../../types/table';
+import { TRequestData, TTaskList } from '../../types/table';
 import TableRow from './table-row';
-import { postTaskData } from '../../../api';
-import { initialCreateNewRowData } from '../../helper/table';
+import { postTaskData } from '../../api';
+import { initialCreateNewRow } from '../helper/table';
 
 type TProps = {
   dataList: TTaskList;
@@ -20,7 +20,7 @@ const TableBody: React.FC<TProps> = ({ dataList }) => {
    */
   const handleCreateNewRow = (dataList: TTaskList) => {
     const body: TRequestData = {
-      ...initialCreateNewRowData,
+      ...initialCreateNewRow,
       userId: dataList.userId,
       userName: dataList.userName,
     };

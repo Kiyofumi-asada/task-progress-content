@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { TDeleteRequestData, TProgressData, TRequestData, TTaskList } from '../../../types/table';
-import { deleteTaskData, putTaskData } from '../../../api';
+import { TDeleteRequestData, TProgressData, TRequestData, TTaskList } from '../../types/table';
+import { deleteTaskData, putTaskData } from '../../api';
 
 type TProps = {
   dataList: TTaskList;
@@ -16,22 +16,21 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   const dispatch = useDispatch();
   const [selectOptionId, setSelectOptionId] = useState<number>(-1);
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
-  const [isCreate, setIsCreate] = useState<boolean>(false);
   //variable
-  const rowSpanCount = dataList.progressData?.length ? dataList.progressData?.length + 1 : 1;
-  const isFirstIdx = idx === 0;
   const workContentsRef = React.useRef<HTMLInputElement>(null);
   const manDayRef = React.useRef<HTMLInputElement>(null);
   const requesterRef = React.useRef<HTMLInputElement>(null);
   const progressRef = React.useRef<HTMLInputElement>(null);
   const noteRef = React.useRef<HTMLInputElement>(null);
+  const rowSpanCount = dataList.progressData?.length ? dataList.progressData?.length + 1 : 1;
+  const isFirstIdx = idx === 0;
   //function
   const convertProgress = (progress: number): number => progress * 100;
   const isAchieve = (int: number): boolean => 100 <= convertProgress(int);
   const selectedOption = (id: string) => setSelectOptionId(Number(id));
   //dispatch
   /**
-   * post & put api call
+   * put api call
    */
   const handleSave = () => {
     const body: TRequestData = {
@@ -55,7 +54,6 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   const handleDelete = () => {
     const params: TDeleteRequestData = { userId: dataList.userId, dataId: data.dataId };
     dispatch(deleteTaskData(params) as any);
-    return;
   };
 
   return (

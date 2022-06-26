@@ -1,15 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TableHeader from './table-header';
 import TableBody from './table-body';
-import { headerData } from '../../helper/table';
-import { selectTaskList } from '../../../redux/slice';
-import { fetchTaskList } from '../../../api';
+import { headerData } from '../helper/table';
+import { selectTaskList } from '../../redux/slice';
+import { fetchTaskList } from '../../api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import Modal from './modal';
 
 const Content: React.FC = () => {
   //react,redux
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const taskDataList = useSelector(selectTaskList);
+
+  //function
+  const modalOpen = () => {
+    setIsModalOpen(true);
+  };
   //dispatch
   /**
    * get api call
@@ -29,6 +38,13 @@ const Content: React.FC = () => {
               <TableBody key={dataList.userId} dataList={dataList} />
             ))}
           </table>
+          <div
+            className="m-1.5 h-6 w-6 cursor-pointer rounded-sm bg-slate-700 text-center text-white hover:bg-slate-900 "
+            onClick={modalOpen}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </div>
+          {isModalOpen ? <Modal setIsModalOpen={setIsModalOpen} /> : null}
         </div>
       </div>
     </div>

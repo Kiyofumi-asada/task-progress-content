@@ -1,8 +1,5 @@
-import { headerData } from '../presentation/helper/table';
-
 // header
-export type THeaderData = typeof headerData;
-export type TPartialHeaderData = Partial<THeaderData>;
+export type THeaderData = { key: string; label: string }[];
 
 // body
 export type TInitialState = {
@@ -13,12 +10,12 @@ export type TProgressData = {
   dataId: number;
   options: { id: number; label: string }[];
   selectedOptionId: number;
-  workContents?: string; //TODO:null許可
-  manDay?: number; //TODO:null許可
-  requester?: string; //TODO:null許可
+  workContents?: string;
+  manDay?: number;
+  requester?: string;
   progress: number;
-  note?: string; //TODO:null許可
-  delete?: boolean; //TODO:null or Date??
+  note?: string;
+  delete?: boolean;
 };
 
 export type TTaskList = {
@@ -30,10 +27,10 @@ export type TPartialTaskList = Partial<TTaskList>;
 export type TTaskListArray = Array<TTaskList>;
 
 export type TRequestData = {
-  userId: number;
+  userId?: number;
   userName: string;
   progressData: {
-    dataId?: number; // dataIdをつける場合はupdate,つけない場合はcreate
+    dataId?: number; //NOTE: dataIdを付ける場合はupdate,付けない場合はcreate
     selectedOptionId: number;
     workContents: string;
     manDay: number;
