@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -16,17 +16,24 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   const dispatch = useDispatch();
   const [selectOptionId, setSelectOptionId] = useState<number>(-1);
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
+  const [workContentsState, setWorkContentsState] = useState<string>('');
+  const [manDayState, setManDayState] = useState<string | number>('');
+  const [requesterState, setRequesterState] = useState<string>('');
+  const [progressState, setProgressState] = useState<string | number>('');
+  const [noteState, setNoteState] = useState<string>('');
+  useEffect(() => {
+    setWorkContentsState(data.workContents);
+    setManDayState(data.manDay);
+    setRequesterState(data.requester);
+    setProgressState(convertProgress(data.progress));
+    setNoteState(data.note);
+  }, []);
   //variable
-  const workContentsRef = React.useRef<HTMLInputElement>(null);
-  const manDayRef = React.useRef<HTMLInputElement>(null);
-  const requesterRef = React.useRef<HTMLInputElement>(null);
-  const progressRef = React.useRef<HTMLInputElement>(null);
-  const noteRef = React.useRef<HTMLInputElement>(null);
   const rowSpanCount = dataList.progressData?.length ? dataList.progressData?.length + 1 : 1;
   const isFirstIdx = idx === 0;
   //function
-  const convertProgress = (progress: number): number => progress * 100;
-  const isAchieve = (int: number): boolean => 100 <= convertProgress(int);
+  const convertProgress = (progress: number | string): number => Number(progress) * 100;
+  const isAchieve = (int: number | string): boolean => 100 <= convertProgress(Number(int));
   const selectedOption = (id: string) => setSelectOptionId(Number(id));
   //dispatch
   /**
@@ -39,11 +46,11 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       progressData: {
         dataId: data.dataId,
         selectedOptionId: selectOptionId,
-        workContents: workContentsRef.current?.value ?? '',
-        manDay: Number(manDayRef.current?.value) ?? 0,
-        requester: requesterRef.current?.value ?? '',
-        progress: Number(progressRef.current?.value) ?? 0,
-        note: noteRef.current?.value ?? '',
+        workContents: workContentsState ?? '',
+        manDay: Number(manDayState) ?? 0,
+        requester: requesterState ?? '',
+        progress: Number(progressState) ?? 0,
+        note: noteState ?? '',
       },
     };
     dispatch(putTaskData(body) as any);
@@ -103,8 +110,10 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
           name="workContents"
           id="workContents"
           placeholder=""
-          ref={workContentsRef}
-          defaultValue={data.workContents}
+          value={workContentsState}
+          onChange={(e) => {
+            setWorkContentsState(e.target.value);
+          }}
         />
       </td>
       {/* 人日 */}
@@ -125,8 +134,10 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
           name="manDay"
           id="manDay"
           placeholder=""
-          ref={manDayRef}
-          defaultValue={data.manDay}
+          value={manDayState}
+          onChange={(e) => {
+            setManDayState(e.target.value);
+          }}
         />
       </td>
       {/* 依頼者 */}
@@ -147,8 +158,10 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
           name="requester"
           id="requester"
           placeholder=""
-          ref={requesterRef}
-          defaultValue={data.requester}
+          value={requesterState}
+          onChange={(e) => {
+            setRequesterState(e.target.value);
+          }}
         />
       </td>
       {/* 進捗 */}
@@ -169,8 +182,10 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
             type="text"
             name="progress"
             placeholder="0-100"
-            defaultValue={convertProgress(data.progress)}
-            ref={progressRef}
+            value={progressState}
+            onChange={(e) => {
+              setProgressState(e.target.value);
+            }}
             onFocus={() => setProgressOnFocus(true)}
             onBlur={() => setProgressOnFocus(false)}
           />
@@ -189,8 +204,10 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
           name="note"
           id="note"
           placeholder=""
-          ref={noteRef}
-          defaultValue={data.note}
+          value={noteState}
+          onChange={(e) => {
+            setNoteState(e.target.value);
+          }}
         />
       </td>
       {/* 削除 */}

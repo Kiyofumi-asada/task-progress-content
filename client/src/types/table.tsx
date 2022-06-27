@@ -10,12 +10,12 @@ export type TProgressData = {
   dataId: number;
   options: { id: number; label: string }[];
   selectedOptionId: number;
-  workContents?: string;
-  manDay?: number;
-  requester?: string;
-  progress: number;
-  note?: string;
-  delete?: boolean;
+  workContents: string;
+  manDay: number | string;
+  requester: string;
+  progress: number | string;
+  note: string;
+  delete: boolean;
 };
 
 export type TTaskList = {
