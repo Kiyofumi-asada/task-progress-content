@@ -49,9 +49,7 @@ const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
                           id="url"
                           placeholder="担当者名"
                           value={inputText}
-                          onChange={(e) => {
-                            setInputText(e.target.value);
-                          }}
+                          onChange={(e) => setInputText(e.target.value)}
                         />
                       </div>
                       <div className="mb-2">

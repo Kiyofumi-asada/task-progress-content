@@ -31,6 +31,14 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   const noSelectedNumber = -1;
   const rowSpanCount = dataList.progressData?.length ? dataList.progressData?.length + 1 : 1;
   const isFirstIdx = idx === 0;
+  //function
+  const convertProgress = (progress: number | string): number => Number(progress) * 100;
+  const isAchieve = (int: number | string): boolean => 100 <= convertProgress(Number(int));
+
+  //dispatch
+  /**
+   * put api call
+   */
   const putBody: TRequestData = {
     userId: dataList.userId,
     userName: dataList.userName,
@@ -44,28 +52,20 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       note: noteState ?? '',
     },
   };
-  //function
-  const convertProgress = (progress: number | string): number => Number(progress) * 100;
-  const isAchieve = (int: number | string): boolean => 100 <= convertProgress(Number(int));
-
-  //dispatch
-  /**
-   * put api call
-   */
-
-  //EnterKey(keycode13)をクリックした場合フォーカスを外しput
+  //enterKey(keycode13)をクリックした場合
   const onEnterClick2put = (e: any) => {
     if (e.keyCode === 13) {
+      //フォーカスを外す
       e.target.blur();
       dispatch(putTaskData(putBody) as any);
     }
   };
-  //フォーカスを外した場合put
+  //inputからフォーカスを外した場合
   const onBlur2put = () => {
     dispatch(putTaskData(putBody) as any);
     setProgressOnFocus(false);
   };
-  //セレクトボックスを選択後put
+  //selectBoxを選択した場合
   const selectedOption2put = (selectedId: any) => {
     const putBody4selectBox = {
       ...putBody,
@@ -156,6 +156,8 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
           onBlur={onBlur2put}
           onKeyDown={(e) => onEnterClick2put(e)}
           onChange={(e) => setManDayState(e.target.value)}
+          maxLength={3}
+          required
         />
       </td>
       {/* 依頼者 */}
