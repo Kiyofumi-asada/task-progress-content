@@ -1,6 +1,6 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
-import Content from './presentation/components/content';
+import Content from './presentation/content';
 
 const App: React.FC = () => {
   return (

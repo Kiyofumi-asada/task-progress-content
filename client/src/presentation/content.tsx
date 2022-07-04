@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import TableHeader from './table-header';
-import TableBody from './table-body';
-import { headerData } from '../helper/table';
-import { selectTaskList } from '../../redux/slice';
-import { fetchTaskList } from '../../api';
+import TableHeader from './components/table-header';
+import TableBody from './components/table-body';
+import { headerData } from './helper/table';
+import { selectTaskList } from '../redux/slice';
+import { fetchTaskList } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import Modal from './modal';
+import Modal from './components/modal';
 
 const Content: React.FC = () => {
   //react,redux
