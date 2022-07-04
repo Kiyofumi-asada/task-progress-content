@@ -29,14 +29,10 @@ const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
         <th className="w-1/12 border-2 border-solid py-1 text-xs">{header.progress}</th>
         <th className="w-3/12 border-2 border-solid py-1 text-xs">{header.note}</th>
         <th className="border-2 border-solid py-1 text-xs">{header.delete}</th>
-        <th className="w-1/12 border-2 border-solid py-1 text-xs">
-          <div className="cursor-pointer text-sm hover:text-blue-700">
-            {/* csv機能追加時に実装
+        {/* csv機能追加時に実装
             <CSVLink filename={`task_progress_${today}.csv`} data={dataList} headers={headerData}>
               <FontAwesomeIcon icon={faFileArrowDown} />
             </CSVLink> */}
-          </div>
-        </th>
       </tr>
     </thead>
   );

@@ -39,7 +39,28 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   /**
    * put api call
    */
-  const handleSave = () => {
+  //EnterKey(keycode13)をクリックした場合フォーカスを外しput
+  const onEnterClick2put = (e: any) => {
+    if (e.keyCode === 13) {
+      e.target.blur();
+      const body: TRequestData = {
+        userId: dataList.userId,
+        userName: dataList.userName,
+        progressData: {
+          dataId: data.dataId,
+          selectedOptionId: selectOptionId,
+          workContents: workContentsState ?? '',
+          manDay: Number(manDayState) ?? 0,
+          requester: requesterState ?? '',
+          progress: Number(progressState) ?? 0,
+          note: noteState ?? '',
+        },
+      };
+      dispatch(putTaskData(body) as any);
+    }
+  };
+  //フォーカスを外した場合put
+  const onBlur2put = () => {
     const body: TRequestData = {
       userId: dataList.userId,
       userName: dataList.userName,
@@ -54,6 +75,26 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       },
     };
     dispatch(putTaskData(body) as any);
+    setProgressOnFocus(false);
+  };
+  //セレクトボックスを選択後put
+  const selectedOption2put = (selectedId: any) => {
+    selectedOption(selectedId);
+    const body: TRequestData = {
+      userId: dataList.userId,
+      userName: dataList.userName,
+      progressData: {
+        dataId: data.dataId,
+        selectedOptionId: selectedId,
+        workContents: workContentsState ?? '',
+        manDay: Number(manDayState) ?? 0,
+        requester: requesterState ?? '',
+        progress: Number(progressState) ?? 0,
+        note: noteState ?? '',
+      },
+    };
+    console.log(body);
+    // dispatch(putTaskData(body) as any);
   };
   /**
    * delete api call
@@ -80,16 +121,12 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         }
       >
         <select
-          className={
-            isAchieve(data.progress)
-              ? 'h-8 w-full cursor-pointer bg-gray-300 text-center'
-              : 'h-8 w-full cursor-pointer text-center'
-          }
+          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
           defaultValue={data.selectedOptionId}
-          onChange={(event) => selectedOption(event.target.value)}
+          onChange={(e) => selectedOption2put(e.target.value)}
         >
           <option value={selectOptionId}>---</option>
-          {data.options.map((option: any) => (
+          {data.options.map((option) => (
             <option defaultValue={data.selectedOptionId} key={option.id} value={option.id}>
               {option.label}
             </option>
@@ -105,15 +142,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         }
       >
         <input
-          className={isAchieve(data.progress) ? 'h-8 w-full cursor-pointer bg-gray-300' : 'h-8 w-full cursor-pointer'}
+          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
           type="text"
           name="workContents"
           id="workContents"
           placeholder=""
           value={workContentsState}
-          onChange={(e) => {
-            setWorkContentsState(e.target.value);
-          }}
+          onBlur={onBlur2put}
+          onKeyDown={(e) => onEnterClick2put(e)}
+          onChange={(e) => setWorkContentsState(e.target.value)}
         />
       </td>
       {/* 人日 */}
@@ -125,19 +162,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         }
       >
         <input
-          className={
-            isAchieve(data.progress)
-              ? 'h-8 w-full cursor-pointer bg-gray-300 text-center'
-              : 'h-8 w-full cursor-pointer text-center'
-          }
+          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
           type="text"
           name="manDay"
           id="manDay"
           placeholder=""
           value={manDayState}
-          onChange={(e) => {
-            setManDayState(e.target.value);
-          }}
+          onBlur={onBlur2put}
+          onKeyDown={(e) => onEnterClick2put(e)}
+          onChange={(e) => setManDayState(e.target.value)}
         />
       </td>
       {/* 依頼者 */}
@@ -149,19 +182,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         }
       >
         <input
-          className={
-            isAchieve(data.progress)
-              ? 'h-8 w-full cursor-pointer bg-gray-300 text-center'
-              : 'h-8 w-full cursor-pointer text-center'
-          }
+          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
           type="text"
           name="requester"
           id="requester"
           placeholder=""
           value={requesterState}
-          onChange={(e) => {
-            setRequesterState(e.target.value);
-          }}
+          onBlur={onBlur2put}
+          onKeyDown={(e) => onEnterClick2put(e)}
+          onChange={(e) => setRequesterState(e.target.value)}
         />
       </td>
       {/* 進捗 */}
@@ -175,19 +204,16 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         <div className="flex">
           <input
             className={
-              isAchieve(data.progress)
-                ? 'h-8 w-full flex-1 cursor-pointer bg-gray-300 text-center'
-                : 'h-8 w-full flex-1 cursor-pointer text-center'
+              isAchieve(data.progress) ? 'h-8 w-full flex-1 bg-gray-300 text-center' : 'h-8 w-full flex-1 text-center'
             }
             type="text"
             name="progress"
             placeholder="0-100"
             value={progressState}
-            onChange={(e) => {
-              setProgressState(e.target.value);
-            }}
+            onChange={(e) => setProgressState(e.target.value)}
             onFocus={() => setProgressOnFocus(true)}
-            onBlur={() => setProgressOnFocus(false)}
+            onBlur={onBlur2put}
+            onKeyDown={(e) => onEnterClick2put(e)}
           />
           {progressOnFocus ? null : <div className="flex-2 leading-8">%</div>}
         </div>
@@ -199,15 +225,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         }
       >
         <input
-          className={isAchieve(data.progress) ? 'h-8 w-full cursor-pointer bg-gray-300' : 'h-8 w-full cursor-pointer'}
+          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
           type="text"
           name="note"
           id="note"
           placeholder=""
           value={noteState}
-          onChange={(e) => {
-            setNoteState(e.target.value);
-          }}
+          onBlur={onBlur2put}
+          onKeyDown={(e) => onEnterClick2put(e)}
+          onChange={(e) => setNoteState(e.target.value)}
         />
       </td>
       {/* 削除 */}
@@ -229,16 +255,6 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
           <FontAwesomeIcon icon={faTrashCan} />
         </div>
       </td>
-      {/* 保存 */}
-      <>
-        <td rowSpan={1} className="flex-none border px-2 text-xs">
-          <div className="cursor-pointer" onClick={handleSave}>
-            <button className="inline-block rounded-sm bg-blue-500 px-1 py-0.5 text-xs font-bold text-white hover:bg-blue-700">
-              save
-            </button>
-          </div>
-        </td>
-      </>
     </>
   );
 };
