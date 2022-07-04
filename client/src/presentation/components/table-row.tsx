@@ -14,7 +14,6 @@ type TProps = {
 const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   //react,redux
   const dispatch = useDispatch();
-  const [selectOptionId, setSelectOptionId] = useState<number>(-1);
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
   const [workContentsState, setWorkContentsState] = useState<string>('');
   const [manDayState, setManDayState] = useState<string | number>('');
@@ -29,63 +28,50 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
     setNoteState(data.note);
   }, []);
   //variable
+  const noSelectedNumber = -1;
   const rowSpanCount = dataList.progressData?.length ? dataList.progressData?.length + 1 : 1;
   const isFirstIdx = idx === 0;
+  const putBody: TRequestData = {
+    userId: dataList.userId,
+    userName: dataList.userName,
+    progressData: {
+      dataId: data.dataId,
+      selectedOptionId: data.selectedOptionId,
+      workContents: workContentsState ?? '',
+      manDay: Number(manDayState) ?? 0,
+      requester: requesterState ?? '',
+      progress: Number(progressState) ?? 0,
+      note: noteState ?? '',
+    },
+  };
   //function
   const convertProgress = (progress: number | string): number => Number(progress) * 100;
   const isAchieve = (int: number | string): boolean => 100 <= convertProgress(Number(int));
-  const selectedOption = (id: string) => setSelectOptionId(Number(id));
+
   //dispatch
   /**
    * put api call
    */
+
   //EnterKey(keycode13)をクリックした場合フォーカスを外しput
   const onEnterClick2put = (e: any) => {
     if (e.keyCode === 13) {
       e.target.blur();
-      const body: TRequestData = {
-        userId: dataList.userId,
-        userName: dataList.userName,
-        progressData: {
-          dataId: data.dataId,
-          selectedOptionId: selectOptionId,
-          workContents: workContentsState ?? '',
-          manDay: Number(manDayState) ?? 0,
-          requester: requesterState ?? '',
-          progress: Number(progressState) ?? 0,
-          note: noteState ?? '',
-        },
-      };
-      dispatch(putTaskData(body) as any);
+      dispatch(putTaskData(putBody) as any);
     }
   };
   //フォーカスを外した場合put
   const onBlur2put = () => {
-    const body: TRequestData = {
-      userId: dataList.userId,
-      userName: dataList.userName,
-      progressData: {
-        dataId: data.dataId,
-        selectedOptionId: selectOptionId,
-        workContents: workContentsState ?? '',
-        manDay: Number(manDayState) ?? 0,
-        requester: requesterState ?? '',
-        progress: Number(progressState) ?? 0,
-        note: noteState ?? '',
-      },
-    };
-    dispatch(putTaskData(body) as any);
+    dispatch(putTaskData(putBody) as any);
     setProgressOnFocus(false);
   };
   //セレクトボックスを選択後put
   const selectedOption2put = (selectedId: any) => {
-    selectedOption(selectedId);
-    const body: TRequestData = {
-      userId: dataList.userId,
-      userName: dataList.userName,
+    const putBody4selectBox = {
+      ...putBody,
       progressData: {
         dataId: data.dataId,
-        selectedOptionId: selectedId,
+        selectedOptionId: Number(selectedId),
         workContents: workContentsState ?? '',
         manDay: Number(manDayState) ?? 0,
         requester: requesterState ?? '',
@@ -93,8 +79,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         note: noteState ?? '',
       },
     };
-    console.log(body);
-    // dispatch(putTaskData(body) as any);
+    dispatch(putTaskData(putBody4selectBox) as any);
   };
   /**
    * delete api call
@@ -125,7 +110,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
           defaultValue={data.selectedOptionId}
           onChange={(e) => selectedOption2put(e.target.value)}
         >
-          <option value={selectOptionId}>---</option>
+          <option value={noSelectedNumber}>---</option>
           {data.options.map((option) => (
             <option defaultValue={data.selectedOptionId} key={option.id} value={option.id}>
               {option.label}
