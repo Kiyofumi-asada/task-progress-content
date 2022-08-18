@@ -129,3 +129,10 @@ export const taskListMock: TTaskListArray = [
     ],
   },
 ];
+
+//TODO:serverで保存・取得できるようにする
+export const options = [
+  { id: 0, label: '値1' },
+  { id: 1, label: '値2' },
+  { id: 2, label: '値3' },
+];

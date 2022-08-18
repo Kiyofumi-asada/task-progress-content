@@ -1,12 +1,13 @@
 import express from 'express';
-import { prismaChat } from '@/infra/chat';
+import { taskModels } from '@/model/task';
 
 const router = express.Router();
 
 // GET
 router.get('/', async (req, res, _next) => {
   try {
-    const resData = await prismaChat.read();
+    const resData = await taskModels.read();
+    console.log('res-----', resData);
     res.status(200).json(resData).send;
   } catch (err) {
     res.status(500).send(err);
@@ -17,8 +18,10 @@ router.get('/', async (req, res, _next) => {
 router.post('/', async (req, res, next) => {
   try {
     const data = req.body;
-    await prismaChat.create(data);
-    const resData = await prismaChat.read();
+    console.log('req-----', data);
+    await taskModels.create(data);
+    const resData = await taskModels.read();
+    console.log('res-----', resData);
     res.status(200).json(resData).send;
   } catch (err) {
     res.status(500).send(err);
@@ -29,8 +32,8 @@ router.post('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const data = req.body;
-    await prismaChat.edit(data);
-    const resData = await prismaChat.read();
+    await taskModels.edit(data);
+    const resData = await taskModels.read();
     res.status(200).json(resData).send;
   } catch (err) {
     res.status(500).send(err);
@@ -41,8 +44,8 @@ router.put('/', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     const id = Number(`${req.params.id}`);
-    await prismaChat.logicalDelete(id);
-    const resData = await prismaChat.read();
+    await taskModels.logicalDelete(id);
+    const resData = await taskModels.read();
     res.status(200).json(resData).send;
   } catch (err) {
     res.status(500).send(err);

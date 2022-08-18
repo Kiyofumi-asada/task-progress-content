@@ -5,8 +5,8 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from './routes/index';
-import chatRouter from './routes/chat';
+import indexRouter from './controller/index';
+import taskRouter from './controller/task';
 
 class App {
   public app: express.Application;
@@ -30,8 +30,7 @@ class App {
 
   private routerSetup() {
     this.app.use('/', indexRouter);
-    this.app.use('/chat', chatRouter);
-    this.app.use('/login', chatRouter);
+    this.app.use('/task', taskRouter);
   }
 
   private errorHandler() {

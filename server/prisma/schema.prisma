@@ -12,27 +12,35 @@ datasource db {
 
 //schema
 model User {
-  id         Int      @id @default(autoincrement())
-  user_id    Int      @db.SmallInt
-  user_name  String   @db.VarChar(255)
-  task       Task[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  isDelete   Boolean? @default(false)
+  id        Int      @id @default(autoincrement())
+  userName  String   @db.VarChar(255)
+  task      Task[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  isDelete  Boolean? @default(false)
 }
 
 model Task {
-  id                 Int      @id @default(autoincrement())
-  task_id            Int      @db.SmallInt
-  selected_option_id Int      @default(-1)
-  work_contents      String?  @db.VarChar(255)
-  man_day            Int?     @db.SmallInt
-  progress           Int?     @db.SmallInt
-  requester          String?  @db.VarChar(255)
-  note               String?  @db.VarChar(255)
-  user               User?    @relation(fields: [user_id], references: [id])
-  user_id            Int?
-  created_at         DateTime @default(now())
-  updated_at         DateTime @updatedAt
-  isDelete           Boolean? @default(false)
+  id               Int      @id @default(autoincrement())
+  taskId           Int      @db.SmallInt
+  selectedOptionId Int      @default(-1)
+  workContents     String?  @db.VarChar(255)
+  manDay           Int?     @db.SmallInt
+  progress         Int?     @db.SmallInt
+  requester        String?  @db.VarChar(255)
+  note             String?  @db.VarChar(255)
+  user             User?    @relation(fields: [userId], references: [id])
+  userId           Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
+  isDelete         Boolean? @default(false)
+}
+
+model Projects {
+  id        Int      @id @default(autoincrement())
+  optionId  Int      @db.SmallInt
+  label     String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  isDelete  Boolean? @default(false)
 }
