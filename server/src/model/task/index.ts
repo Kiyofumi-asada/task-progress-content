@@ -1,16 +1,37 @@
-import { Task } from '@prisma/client';
+import { User, Task } from '@prisma/client';
 import { errorHandler, prisma } from '..';
 
 //GET
-const read = async (): Promise<Task[]> => {
-  console.log('model-----');
-  return await prisma.task.findMany({});
+const read = async (): Promise<User[]> => {
+  const userData = await prisma.user.findMany({
+    include: {
+      task: true,
+    },
+  });
+  const projects = await prisma.projects.findMany({
+    select: {
+      optionId: true,
+      label: true,
+    },
+  });
+  const res = await userData.map((data) => {
+    const { task } = data;
+    const mergeTaskAndProjects = task.map((task) => {
+      return { ...task, projects };
+    });
+    return {
+      ...data,
+      task: mergeTaskAndProjects,
+    };
+  });
+  return res;
 };
+
 //POST
 const create = async (data: Task): Promise<void> => {
-  console.log('model-----', data);
   await prisma.task.create({ data });
 };
+
 //PUT
 const edit = async (data: Task): Promise<void> => {
   const { id } = data;
@@ -37,7 +58,7 @@ const logicalDelete = async (detailId: number): Promise<void> => {
 };
 
 export const taskModels = {
-  read: (): Promise<Task[]> => errorHandler(read()),
+  read: (): Promise<User[]> => errorHandler(read()),
   create: (data: Task): Promise<void> => errorHandler(create(data)),
   edit: (data: Task): Promise<void> => errorHandler(edit(data)),
   logicalDelete: (data: number): Promise<void> =>
