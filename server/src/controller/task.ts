@@ -4,7 +4,7 @@ import { taskModels } from '@/model/task';
 const router = express.Router();
 
 // GET
-router.get('/', async (req, res, _next) => {
+router.get('/', async (_req, res) => {
   try {
     const resData = await taskModels.read();
     res.status(200).json(resData).send;
@@ -14,7 +14,7 @@ router.get('/', async (req, res, _next) => {
 });
 
 // POST
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   try {
     const userId = Number(Object.values(req.body));
     await taskModels.create(userId);
@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
 });
 
 //PUT
-router.put('/', async (req, res, next) => {
+router.put('/', async (req, res) => {
   try {
     const data = req.body;
     await taskModels.edit(data);
@@ -38,7 +38,7 @@ router.put('/', async (req, res, next) => {
 });
 
 //DELETE
-router.delete('/', async (req, res, next) => {
+router.delete('/', async (req, res) => {
   try {
     const taskId = Number(`${req.query.taskId}`);
     await taskModels.logicalDelete(taskId);

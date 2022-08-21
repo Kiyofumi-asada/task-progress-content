@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postUserData } from '../../api';
 import { TRequestCreateUserData } from '../../types/user';
-import { createUserToast } from '../helper/toast';
 
 type TProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

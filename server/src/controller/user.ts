@@ -5,7 +5,7 @@ import { taskModels } from '@/model/task';
 const router = express.Router();
 
 // POST
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   try {
     const data = req.body;
     const getNewUser = await await userModels.create(data);
@@ -18,7 +18,7 @@ router.post('/', async (req, res, next) => {
 });
 
 //PUT
-router.put('/', async (req, res, next) => {
+router.put('/', async (req, res) => {
   try {
     const data = req.body;
     await userModels.edit(data);
@@ -30,7 +30,7 @@ router.put('/', async (req, res, next) => {
 });
 
 //DELETE
-router.delete('/', async (req, res, next) => {
+router.delete('/', async (req, res) => {
   try {
     const taskId = Number(`${req.query.taskId}`);
     await userModels.logicalDelete(taskId);
