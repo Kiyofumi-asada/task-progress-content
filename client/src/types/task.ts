@@ -7,7 +7,7 @@ export type TInitialState = {
 };
 
 export type TTask = {
-  taskId: number;
+  id: number;
   projects: { id: number; label: string }[];
   selectedOptionId: number;
   workContents: string;
@@ -15,8 +15,9 @@ export type TTask = {
   requester: string;
   progress: number | string;
   note: string;
-  delete: boolean;
+  isDelete?: boolean;
 };
+export type TPartialTask = Partial<TTask>;
 
 export type TTaskList = {
   id: number;
@@ -30,7 +31,7 @@ export type TRequestData = {
   id?: number;
   userName: string;
   task: {
-    taskId?: number; //NOTE: dataIdを付ける場合はupdate,付けない場合はcreate
+    id?: number;
     selectedOptionId: number;
     workContents: string;
     manDay: number;
@@ -39,7 +40,6 @@ export type TRequestData = {
     note: string;
   };
 };
-export type TDeleteRequestData = {
-  userId: number;
-  dataId: number;
-};
+
+//GET User type
+export type TGetUser = Omit<TTask, 'projects' | 'isDelete'>;

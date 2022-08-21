@@ -1,4 +1,4 @@
-import { THeaderData, TRequestData } from '../../types';
+import { THeaderData, TRequestData, TPartialTask } from '../../types/task';
 
 // header
 export const headerData: THeaderData = [
@@ -26,15 +26,11 @@ export const initialCreateNewUser: TRequestData = {
   },
 };
 
-export const initialCreateNewRow: TRequestData = {
-  id: 1,
-  userName: '',
-  task: {
-    selectedOptionId: -1,
-    workContents: '',
-    manDay: 0,
-    requester: '',
-    progress: 0,
-    note: '',
-  },
+export const addNewRow: TPartialTask = {
+  selectedOptionId: -1,
+  workContents: '',
+  manDay: 0,
+  requester: '',
+  progress: 0,
+  note: '',
 };

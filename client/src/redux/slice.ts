@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { TInitialState } from '../types';
+import { TInitialState } from '../types/task';
 import { fetchTaskList, postTaskData, putTaskData, deleteTaskData, postUserData } from '../api';
 
 const initialState: TInitialState = {
@@ -14,7 +14,7 @@ const taskSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // get
+    //GET
     builder.addCase(fetchTaskList.fulfilled, (state, action) => {
       return {
         ...state,
@@ -27,8 +27,8 @@ const taskSlice = createSlice({
         taskList: initialState.taskList,
       };
     });
-    //post
-    //task
+
+    //POST
     builder.addCase(postTaskData.fulfilled, (state, action) => {
       return {
         ...state,
@@ -54,7 +54,7 @@ const taskSlice = createSlice({
         taskList: initialState.taskList,
       };
     });
-    //put
+    //PUT
     builder.addCase(putTaskData.fulfilled, (state, action) => {
       return {
         ...state,
@@ -67,7 +67,7 @@ const taskSlice = createSlice({
         taskList: initialState.taskList,
       };
     });
-    //delete
+    //DELETE
     builder.addCase(deleteTaskData.fulfilled, (state, action) => {
       return {
         ...state,

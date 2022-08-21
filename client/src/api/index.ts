@@ -1,42 +1,42 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const path = 'task';
+const taskApiPath = 'task';
+const userApiPath = 'user';
 
-//Task
+//Task API
 //GET
 export const fetchTaskList = createAsyncThunk('task/fetchTaskList', async () => {
-  const { data } = await axios.get<any[]>(path);
+  const { data } = await axios.get<any[]>(taskApiPath);
   return { data: data };
 });
 
 //POST
 export const postTaskData = createAsyncThunk('task/postTaskData', async (body: any) => {
   console.log('api call post task', body);
-  const { status, data } = await axios.post<any[]>(path, body);
+  const { status, data } = await axios.post<any[]>(taskApiPath, body);
   return { status, data };
 });
 
 //PUT
 export const putTaskData = createAsyncThunk('task/putTaskData', async (body: any) => {
   console.log('api call put', body);
-  const { status, data } = await axios.put<any[]>(path, body);
+  const { status, data } = await axios.put<any[]>(taskApiPath, body);
   return { status, data };
 });
 
 //DELETE
-export const deleteTaskData = createAsyncThunk('task/deleteTaskData', async (params: any) => {
-  const { userId, dataId } = params;
-  const deletePath = `${path}?userId=${userId}&dataId=${dataId}`;
+export const deleteTaskData = createAsyncThunk('task/deleteTaskData', async (taskId: any) => {
+  const deletePath = `${taskApiPath}?taskId=${taskId}`;
   console.log('api call delete', deletePath);
   const { status, data } = await axios.delete<any[]>(deletePath);
   return { status, data };
 });
 
-//Create User
+//User API
 //POST
-export const postUserData = createAsyncThunk('task/postUserData', async (body: any) => {
+export const postUserData = createAsyncThunk('user/postUserData', async (body: any) => {
   console.log('api call post user', body);
-  const { status, data } = await axios.post<any[]>(path, body);
+  const { status, data } = await axios.post<any[]>(userApiPath, body);
   return { status, data };
 });

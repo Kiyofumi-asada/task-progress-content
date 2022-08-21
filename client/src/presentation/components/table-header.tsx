@@ -2,7 +2,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { fromPairs } from 'ramda';
-import { THeaderData, TTaskListArray } from '../../types';
+import { THeaderData, TTaskListArray } from '../../types/task';
 import { CSVLink } from 'react-csv';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';

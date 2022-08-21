@@ -22,15 +22,14 @@ model User {
 
 model Task {
   id               Int      @id @default(autoincrement())
-  taskId           Int      @db.SmallInt
   selectedOptionId Int      @default(-1)
   workContents     String?  @db.VarChar(255)
   manDay           Int?     @db.SmallInt
-  progress         Int?     @db.SmallInt
   requester        String?  @db.VarChar(255)
+  progress         Int?     @db.SmallInt
   note             String?  @db.VarChar(255)
-  user             User?    @relation(fields: [userId], references: [id])
-  userId           Int?
+  user             User     @relation(fields: [userId], references: [id])
+  userId           Int
   createdAt        DateTime @default(now())
   updatedAt        DateTime @default(now())
   isDelete         Boolean? @default(false)

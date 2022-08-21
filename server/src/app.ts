@@ -7,6 +7,7 @@ import logger from 'morgan';
 
 import indexRouter from './controller/index';
 import taskRouter from './controller/task';
+import userRouter from './controller/user';
 
 class App {
   public app: express.Application;
@@ -19,8 +20,6 @@ class App {
   }
 
   private config() {
-    this.app.set('views', path.join(__dirname, 'views'));
-    this.app.set('view engine', 'ejs');
     this.app.use(logger('dev'));
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
@@ -31,6 +30,7 @@ class App {
   private routerSetup() {
     this.app.use('/', indexRouter);
     this.app.use('/task', taskRouter);
+    this.app.use('/user', userRouter);
   }
 
   private errorHandler() {

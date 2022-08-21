@@ -1,4 +1,4 @@
-import { errorHandler, prisma } from '..';
+import { errorHandler, prisma } from '.';
 import { Task } from '@prisma/client';
 import { TGetUser } from '@/types';
 
@@ -13,21 +13,41 @@ const read = async (): Promise<TGetUser[]> => {
   const res = await userData.map((data) => {
     const { task, id, userName, isDelete } = data;
     const mergeTaskAndProjects = task.map((task) => {
-      return { ...task, projects };
+      const { workContents, manDay, progress, requester, note } = task;
+      return task.isDelete
+        ? null
+        : {
+            ...task,
+            workContents: !workContents ? '' : workContents,
+            manDay: !manDay ? '' : manDay,
+            requester: !requester ? '' : requester,
+            progress: !progress ? 0 : progress,
+            note: !note ? '' : note,
+            projects: projects,
+          };
     });
     return {
       id: id,
       userName: userName,
       isDelete: isDelete,
-      task: mergeTaskAndProjects,
+      task: mergeTaskAndProjects.filter((v) => v),
     };
   });
   return res;
 };
 
 //POST
-const create = async (data: Task): Promise<void> => {
-  await prisma.task.create({ data });
+const create = async (userId: number): Promise<void> => {
+  await prisma.task.create({
+    data: {
+      selectedOptionId: -1,
+      workContents: '',
+      requester: '',
+      progress: 0,
+      note: '',
+      userId: userId,
+    },
+  });
 };
 
 //PUT
@@ -44,13 +64,12 @@ const edit = async (data: Task): Promise<void> => {
 };
 
 //DELETE
-const logicalDelete = async (detailId: number): Promise<void> => {
+const logicalDelete = async (taskId: number): Promise<void> => {
   await prisma.task.update({
     where: {
-      id: detailId,
+      id: taskId,
     },
     data: {
-      updatedAt: new Date(),
       isDelete: true,
     },
   });
@@ -58,8 +77,8 @@ const logicalDelete = async (detailId: number): Promise<void> => {
 
 export const taskModels = {
   read: (): Promise<TGetUser[]> => errorHandler(read()),
-  create: (data: Task): Promise<void> => errorHandler(create(data)),
+  create: (data: number): Promise<void> => errorHandler(create(data)),
   edit: (data: Task): Promise<void> => errorHandler(edit(data)),
-  logicalDelete: (data: number): Promise<void> =>
-    errorHandler(logicalDelete(data)),
+  logicalDelete: (taskId: number): Promise<void> =>
+    errorHandler(logicalDelete(taskId)),
 };

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { postUserData } from '../../api';
-import { TRequestData } from '../../types';
-import { initialCreateNewUser } from '../helper/table';
+import { TRequestCreateUserData } from '../../types/user';
 import { createUserToast } from '../helper/toast';
 
 type TProps = {
@@ -18,14 +16,15 @@ const CreateUser: React.FC<TProps> = ({ setIsModalOpen }) => {
   const userNameRef = React.useRef<HTMLInputElement>(null);
   const isDisabled = inputText.length ? false : true;
   //function
+  /**
+   * POST User API call
+   */
   const handleCreateNewUser = async () => {
-    const body: TRequestData = {
-      ...initialCreateNewUser,
+    const body: TRequestCreateUserData = {
       userName: userNameRef.current?.value ?? '',
     };
     await dispatch(postUserData(body) as any);
     await setIsModalOpen(false);
-    await createUserToast;
   };
 
   return (
@@ -51,7 +50,7 @@ const CreateUser: React.FC<TProps> = ({ setIsModalOpen }) => {
                           name="title"
                           id="url"
                           placeholder="担当者名"
-                          value={inputText}
+                          ref={userNameRef}
                           onChange={(e) => setInputText(e.target.value)}
                         />
                       </div>

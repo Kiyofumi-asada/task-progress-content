@@ -1,26 +1,27 @@
 import express from 'express';
+import { userModels } from '@/model/user';
 import { taskModels } from '@/model/task';
 
 const router = express.Router();
 
 // GET
-router.get('/', async (req, res, _next) => {
-  try {
-    const resData = await taskModels.read();
-    res.status(200).json(resData).send;
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
+// router.get('/', async (req, res, _next) => {
+//   try {
+//     const resData = await taskModels.read();
+//     // console.log('res-----', resData);
+//     res.status(200).json(resData).send;
+//   } catch (err) {
+//     res.status(500).send(err);
+//   }
+// });
 
 // POST
 router.post('/', async (req, res, next) => {
   try {
     const data = req.body;
-    console.log('req-----', data);
-    await taskModels.create(data);
+    const getNewUser = await await userModels.create(data);
+    await taskModels.create(getNewUser.id);
     const resData = await taskModels.read();
-    console.log('res-----', resData);
     res.status(200).json(resData).send;
   } catch (err) {
     res.status(500).send(err);
@@ -31,7 +32,7 @@ router.post('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const data = req.body;
-    await taskModels.edit(data);
+    await userModels.edit(data);
     const resData = await taskModels.read();
     res.status(200).json(resData).send;
   } catch (err) {
@@ -43,7 +44,7 @@ router.put('/', async (req, res, next) => {
 router.delete('/', async (req, res, next) => {
   try {
     const taskId = Number(`${req.query.taskId}`);
-    await taskModels.logicalDelete(taskId);
+    await userModels.logicalDelete(taskId);
     const resData = await taskModels.read();
     res.status(200).json(resData).send;
   } catch (err) {

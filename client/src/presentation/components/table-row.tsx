@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { TDeleteRequestData, TTask, TRequestData, TTaskList } from '../../types';
+import { TTask, TRequestData, TTaskList } from '../../types/task';
 import { deleteTaskData, putTaskData } from '../../api';
 
 type TProps = {
   taskList: TTaskList;
   task: TTask;
-  idx: number;
+  index: number;
 };
 
-const TableRow: React.FC<TProps> = ({ taskList, task, idx }) => {
+const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   //react,redux
   const dispatch = useDispatch();
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
@@ -30,20 +30,20 @@ const TableRow: React.FC<TProps> = ({ taskList, task, idx }) => {
   //variable
   const noSelectedNumber = -1;
   const rowSpanCount = taskList.task?.length ? taskList.task?.length + 1 : 1;
-  const isFirstIdx = idx === 0;
+  const isFirstIndex = index === 0;
   //function
   const convertProgress = (progress: number | string): number => Number(progress) * 100;
   const isAchieve = (int: number | string): boolean => 100 <= convertProgress(Number(int));
 
   //dispatch
   /**
-   * put api call
+   * PUT Task API call
    */
   const putBody: TRequestData = {
     id: taskList.id,
     userName: taskList.userName,
     task: {
-      taskId: task.taskId,
+      id: task.id,
       selectedOptionId: task.selectedOptionId,
       workContents: workContentsState ?? '',
       manDay: Number(manDayState) ?? 0,
@@ -52,25 +52,25 @@ const TableRow: React.FC<TProps> = ({ taskList, task, idx }) => {
       note: noteState ?? '',
     },
   };
-  //enterKey(keycode13)をクリックした場合
-  const onEnterClick2put = (e: any) => {
+  //入力後EnterKeyをクリック
+  const onEnterClick2put = async (e: any) => {
     if (e.keyCode === 13) {
       //フォーカスを外す
-      e.target.blur();
-      dispatch(putTaskData(putBody) as any);
+      await e.target.blur();
+      await dispatch(putTaskData(putBody) as any);
     }
   };
-  //inputからフォーカスを外した場合
-  const onBlur2put = () => {
-    dispatch(putTaskData(putBody) as any);
-    setProgressOnFocus(false);
+  //入力後inputからフォーカスを外す
+  const onBlur2put = async () => {
+    await dispatch(putTaskData(putBody) as any);
+    await setProgressOnFocus(false);
   };
-  //selectBoxを選択した場合
+  //selectBoxを変更
   const selectedOption2put = (selectedId: any) => {
     const putBody4selectBox = {
       ...putBody,
       task: {
-        dataId: task.taskId,
+        id: task.id,
         selectedOptionId: Number(selectedId),
         workContents: workContentsState ?? '',
         manDay: Number(manDayState) ?? 0,
@@ -82,17 +82,16 @@ const TableRow: React.FC<TProps> = ({ taskList, task, idx }) => {
     dispatch(putTaskData(putBody4selectBox) as any);
   };
   /**
-   * delete api call
+   * DELETE Task API call
    */
   const handleDelete = () => {
-    const params: TDeleteRequestData = { userId: taskList.id, dataId: task.taskId };
-    dispatch(deleteTaskData(params) as any);
+    dispatch(deleteTaskData(task.id) as any);
   };
 
   return (
     <>
       {/* 担当者 */}
-      {isFirstIdx ? (
+      {isFirstIndex ? (
         <>
           <td rowSpan={rowSpanCount} className="flex-none border py-0 text-center text-xs">
             {taskList.userName}

@@ -14,6 +14,7 @@ const TableContainer: React.FC = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const userTaskList = useSelector(selectTaskList);
+  console.log('userTaskList', userTaskList);
 
   //function
   const modalOpen = () => {
@@ -21,7 +22,7 @@ const TableContainer: React.FC = () => {
   };
   //dispatch
   /**
-   * get api call
+   * GET Task API call
    */
   useEffect(() => {
     dispatch(fetchTaskList() as any);

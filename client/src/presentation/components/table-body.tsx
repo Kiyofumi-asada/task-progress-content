@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { TRequestData, TTaskList } from '../../types';
+import { TRequestData, TTaskList } from '../../types/task';
 import TableRow from './table-row';
 import { postTaskData } from '../../api';
-import { initialCreateNewRow } from '../helper/table';
+import { addNewRow } from '../helper/table';
 
 type TProps = {
   taskList: TTaskList;
@@ -16,22 +16,30 @@ const TableBody: React.FC<TProps> = ({ taskList }) => {
   const dispatch = useDispatch();
   //function
   /**
-   * post api call
+   * POST Task API call
    */
   const handleCreateNewRow = (taskList: TTaskList) => {
     const body: TRequestData = {
-      ...initialCreateNewRow,
       id: taskList.id,
       userName: taskList.userName,
+      task: {
+        selectedOptionId: -1,
+        workContents: '',
+        manDay: 0,
+        requester: '',
+        progress: 0,
+        note: '',
+      },
     };
+    console.log('createNerLow', addNewRow);
     dispatch(postTaskData(body) as any);
   };
 
   return (
     <tbody>
-      {taskList.task?.map((task, idx) => (
-        <tr key={task.taskId}>
-          <TableRow taskList={taskList} task={task} idx={idx} />
+      {taskList.task?.map((task, index) => (
+        <tr key={task.id}>
+          <TableRow taskList={taskList} task={task} index={index} />
         </tr>
       ))}
       <tr className="border-b-2 border-b-gray-800">

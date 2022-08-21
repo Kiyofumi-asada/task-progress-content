@@ -12,14 +12,13 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Task` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `taskId` SMALLINT NOT NULL,
     `selectedOptionId` INTEGER NOT NULL DEFAULT -1,
     `workContents` VARCHAR(255) NULL,
     `manDay` SMALLINT NULL,
     `progress` SMALLINT NULL,
     `requester` VARCHAR(255) NULL,
     `note` VARCHAR(255) NULL,
-    `userId` INTEGER NULL,
+    `userId` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `isDelete` BOOLEAN NULL DEFAULT false,
@@ -40,4 +39,4 @@ CREATE TABLE `Projects` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Task` ADD CONSTRAINT `Task_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `Task` ADD CONSTRAINT `Task_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
