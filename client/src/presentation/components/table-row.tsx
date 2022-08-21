@@ -69,9 +69,10 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   //入力後EnterKeyをクリック
   const onEnterClick2put = async (e: any) => {
     if (e.keyCode === 13) {
-      await e.target.blur();
       if (!isChangedData) return;
+      console.log('enter');
       await dispatch(putTaskData(putBody) as any);
+      await e.target.blur();
     }
   };
   //入力後inputからフォーカスを外す
