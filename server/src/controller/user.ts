@@ -4,17 +4,6 @@ import { taskModels } from '@/model/task';
 
 const router = express.Router();
 
-// GET
-// router.get('/', async (req, res, _next) => {
-//   try {
-//     const resData = await taskModels.read();
-//     // console.log('res-----', resData);
-//     res.status(200).json(resData).send;
-//   } catch (err) {
-//     res.status(500).send(err);
-//   }
-// });
-
 // POST
 router.post('/', async (req, res, next) => {
   try {

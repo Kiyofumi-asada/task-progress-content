@@ -14,7 +14,6 @@ const TableContainer: React.FC = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const userTaskList = useSelector(selectTaskList);
-  console.log('userTaskList', userTaskList);
 
   //function
   const modalOpen = () => {

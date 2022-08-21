@@ -31,7 +31,6 @@ const TableBody: React.FC<TProps> = ({ taskList }) => {
         note: '',
       },
     };
-    console.log('createNerLow', addNewRow);
     dispatch(postTaskData(body) as any);
   };
 

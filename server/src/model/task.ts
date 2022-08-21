@@ -1,5 +1,5 @@
 import { errorHandler, prisma } from '.';
-import { Task } from '@prisma/client';
+import { Task, User } from '@prisma/client';
 import { TGetUser } from '@/types';
 
 //GET
@@ -38,7 +38,6 @@ const read = async (): Promise<TGetUser[]> => {
     };
   });
 
-  console.log();
   return res;
 };
 
@@ -57,15 +56,13 @@ const create = async (userId: number): Promise<void> => {
 };
 
 //PUT
-const edit = async (data: Task): Promise<void> => {
-  const { id } = data;
+const edit = async (data: any): Promise<void> => {
+  const { task } = data;
   await prisma.task.update({
     where: {
-      id: id,
+      id: task.id,
     },
-    data: {
-      updatedAt: new Date(),
-    },
+    data: task,
   });
 };
 

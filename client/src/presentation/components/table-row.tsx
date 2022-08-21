@@ -20,6 +20,7 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   const [requesterState, setRequesterState] = useState<string>('');
   const [progressState, setProgressState] = useState<string | number>('');
   const [noteState, setNoteState] = useState<string>('');
+
   useEffect(() => {
     setWorkContentsState(task.workContents);
     setManDayState(task.manDay);
@@ -27,6 +28,20 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
     setProgressState(convertProgress(task.progress));
     setNoteState(task.note);
   }, []);
+
+  //データ変更検知用
+  let isChangedData = false;
+  if (
+    workContentsState !== task.workContents ||
+    manDayState !== task.manDay ||
+    requesterState !== task.requester ||
+    progressState !== task.progress ||
+    noteState !== task.note
+  ) {
+    isChangedData = true;
+  } else {
+    isChangedData = false;
+  }
   //variable
   const noSelectedNumber = -1;
   const rowSpanCount = taskList.task?.length ? taskList.task?.length + 1 : 1;
@@ -52,16 +67,22 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
       note: noteState ?? '',
     },
   };
+
   //入力後EnterKeyをクリック
   const onEnterClick2put = async (e: any) => {
     if (e.keyCode === 13) {
-      //フォーカスを外す
       await e.target.blur();
+      //データ変更していない場合はputしない
+      if (!isChangedData) return;
+
       await dispatch(putTaskData(putBody) as any);
     }
   };
   //入力後inputからフォーカスを外す
   const onBlur2put = async () => {
+    //データ変更していない場合はputしない
+    if (!isChangedData) return;
+
     await dispatch(putTaskData(putBody) as any);
     await setProgressOnFocus(false);
   };
