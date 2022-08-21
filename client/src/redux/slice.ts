@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { TInitialState } from '../types/table';
+import { TInitialState } from '../types';
 import { fetchTaskList, postTaskData, putTaskData, deleteTaskData, postUserData } from '../api';
 
 const initialState: TInitialState = {

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { postUserData } from '../../api';
-import { TRequestData } from '../../types/table';
+import { TRequestData } from '../../types';
 import { initialCreateNewUser } from '../helper/table';
+import { createUserToast } from '../helper/toast';
 
 type TProps = {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
+const CreateUser: React.FC<TProps> = ({ setIsModalOpen }) => {
   //react,redux
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState<string>('');
@@ -16,13 +18,14 @@ const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
   const userNameRef = React.useRef<HTMLInputElement>(null);
   const isDisabled = inputText.length ? false : true;
   //function
-  const handleCreateNewUser = () => {
+  const handleCreateNewUser = async () => {
     const body: TRequestData = {
       ...initialCreateNewUser,
       userName: userNameRef.current?.value ?? '',
     };
-    dispatch(postUserData(body) as any);
-    setIsModalOpen(false);
+    await dispatch(postUserData(body) as any);
+    await setIsModalOpen(false);
+    await createUserToast;
   };
 
   return (
@@ -79,4 +82,4 @@ const Modal: React.FC<TProps> = ({ setIsModalOpen }) => {
   );
 };
 
-export default Modal;
+export default CreateUser;

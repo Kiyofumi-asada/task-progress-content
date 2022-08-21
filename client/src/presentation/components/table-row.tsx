@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { TDeleteRequestData, TTask, TRequestData, TTaskList } from '../../types/table';
+import { TDeleteRequestData, TTask, TRequestData, TTaskList } from '../../types';
 import { deleteTaskData, putTaskData } from '../../api';
 
 type TProps = {
-  dataList: TTaskList;
+  taskList: TTaskList;
   task: TTask;
   idx: number;
 };
 
-const TableRow: React.FC<TProps> = ({ dataList, task, idx }) => {
+const TableRow: React.FC<TProps> = ({ taskList, task, idx }) => {
   //react,redux
   const dispatch = useDispatch();
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
@@ -29,7 +29,7 @@ const TableRow: React.FC<TProps> = ({ dataList, task, idx }) => {
   }, []);
   //variable
   const noSelectedNumber = -1;
-  const rowSpanCount = dataList.task?.length ? dataList.task?.length + 1 : 1;
+  const rowSpanCount = taskList.task?.length ? taskList.task?.length + 1 : 1;
   const isFirstIdx = idx === 0;
   //function
   const convertProgress = (progress: number | string): number => Number(progress) * 100;
@@ -40,8 +40,8 @@ const TableRow: React.FC<TProps> = ({ dataList, task, idx }) => {
    * put api call
    */
   const putBody: TRequestData = {
-    userId: dataList.id,
-    userName: dataList.userName,
+    id: taskList.id,
+    userName: taskList.userName,
     task: {
       taskId: task.taskId,
       selectedOptionId: task.selectedOptionId,
@@ -85,7 +85,7 @@ const TableRow: React.FC<TProps> = ({ dataList, task, idx }) => {
    * delete api call
    */
   const handleDelete = () => {
-    const params: TDeleteRequestData = { userId: dataList.id, dataId: task.taskId };
+    const params: TDeleteRequestData = { userId: taskList.id, dataId: task.taskId };
     dispatch(deleteTaskData(params) as any);
   };
 
@@ -95,7 +95,7 @@ const TableRow: React.FC<TProps> = ({ dataList, task, idx }) => {
       {isFirstIdx ? (
         <>
           <td rowSpan={rowSpanCount} className="flex-none border py-0 text-center text-xs">
-            {dataList.userName}
+            {taskList.userName}
           </td>
         </>
       ) : null}

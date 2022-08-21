@@ -1,12 +1,12 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
-import Content from './presentation/content';
+import TableContainer from './presentation/components/table-container';
 
 const App: React.FC = () => {
   return (
     <>
       <Toaster />
-      <Content />
+      <TableContainer />
     </>
   );
 };

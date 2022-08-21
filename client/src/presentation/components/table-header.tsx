@@ -2,17 +2,17 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { fromPairs } from 'ramda';
-import { THeaderData, TTaskListArray } from '../../types/table';
+import { THeaderData, TTaskListArray } from '../../types';
 import { CSVLink } from 'react-csv';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 type TProps = {
   headerData: THeaderData;
-  dataList: TTaskListArray;
+  taskList: TTaskListArray;
 };
 
-const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
+const TableHeader: React.FC<TProps> = ({ headerData, taskList }) => {
   //variable
   const pair = headerData.map((header) => Object.values(header) as any);
   const header = fromPairs(pair) as any;
@@ -30,7 +30,7 @@ const TableHeader: React.FC<TProps> = ({ headerData, dataList }) => {
         <th className="w-3/12 border-2 border-solid py-1 text-xs">{header.note}</th>
         <th className="border-2 border-solid py-1 text-xs">{header.delete}</th>
         {/* csv機能追加時に実装
-            <CSVLink filename={`task_progress_${today}.csv`} data={dataList} headers={headerData}>
+            <CSVLink filename={`task_progress_${today}.csv`} data={taskList} headers={headerData}>
               <FontAwesomeIcon icon={faFileArrowDown} />
             </CSVLink> */}
       </tr>

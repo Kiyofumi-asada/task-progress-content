@@ -1,8 +1,9 @@
-import { User, Task } from '@prisma/client';
 import { errorHandler, prisma } from '..';
+import { Task } from '@prisma/client';
+import { TGetUser } from '@/types';
 
 //GET
-const read = async (): Promise<User[]> => {
+const read = async (): Promise<TGetUser[]> => {
   const userData = await prisma.user.findMany({
     include: {
       task: true,
@@ -10,12 +11,14 @@ const read = async (): Promise<User[]> => {
   });
   const projects = await prisma.projects.findMany({});
   const res = await userData.map((data) => {
-    const { task } = data;
+    const { task, id, userName, isDelete } = data;
     const mergeTaskAndProjects = task.map((task) => {
       return { ...task, projects };
     });
     return {
-      ...data,
+      id: id,
+      userName: userName,
+      isDelete: isDelete,
       task: mergeTaskAndProjects,
     };
   });
@@ -39,6 +42,7 @@ const edit = async (data: Task): Promise<void> => {
     },
   });
 };
+
 //DELETE
 const logicalDelete = async (detailId: number): Promise<void> => {
   await prisma.task.update({
@@ -53,7 +57,7 @@ const logicalDelete = async (detailId: number): Promise<void> => {
 };
 
 export const taskModels = {
-  read: (): Promise<User[]> => errorHandler(read()),
+  read: (): Promise<TGetUser[]> => errorHandler(read()),
   create: (data: Task): Promise<void> => errorHandler(create(data)),
   edit: (data: Task): Promise<void> => errorHandler(edit(data)),
   logicalDelete: (data: number): Promise<void> =>

@@ -27,7 +27,7 @@ export type TPartialTaskList = Partial<TTaskList>;
 export type TTaskListArray = Array<TTaskList>;
 
 export type TRequestData = {
-  userId?: number;
+  id?: number;
   userName: string;
   task: {
     taskId?: number; //NOTE: dataIdを付ける場合はupdate,付けない場合はcreate
