@@ -16,8 +16,8 @@ router.get('/', async (req, res, _next) => {
 // POST
 router.post('/', async (req, res, next) => {
   try {
-    const data = req.body;
-    await taskModels.create(data);
+    const userId = Number(Object.values(req.body));
+    await taskModels.create(userId);
     const resData = await taskModels.read();
     res.status(200).json(resData).send;
   } catch (err) {

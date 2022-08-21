@@ -25,11 +25,14 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
     setWorkContentsState(task.workContents);
     setManDayState(task.manDay);
     setRequesterState(task.requester);
-    setProgressState(convertProgress(task.progress));
+    setProgressState(task.progress);
     setNoteState(task.note);
   }, []);
 
-  //データ変更検知用
+  //variable
+  const noSelectedNumber = -1;
+  const rowSpanCount = taskList.task?.length ? taskList.task?.length + 1 : 1;
+  const isFirstIndex = index === 0;
   let isChangedData = false;
   if (
     workContentsState !== task.workContents ||
@@ -42,13 +45,8 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   } else {
     isChangedData = false;
   }
-  //variable
-  const noSelectedNumber = -1;
-  const rowSpanCount = taskList.task?.length ? taskList.task?.length + 1 : 1;
-  const isFirstIndex = index === 0;
   //function
-  const convertProgress = (progress: number | string): number => Number(progress) * 100;
-  const isAchieve = (int: number | string): boolean => 100 <= convertProgress(Number(int));
+  const isAchieve = (int: number | string): boolean => 100 <= Number(int);
 
   //dispatch
   /**
@@ -102,13 +100,21 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
    * DELETE Task API call
    */
   const handleDelete = async () => {
-    const isNoChange =
+    let isNoChange = false;
+    //taskが空となった場合デフォルトデータ1行が作成される
+    //不要なデータ削除・再作成を回避するため、taskのlengthが1以下かつデフォルトデータから未変更の場合DeleteApiは呼ばない
+    if (
+      taskList.task &&
+      taskList.task?.length <= 1 &&
       Number(task.selectedOptionId) === -1 &&
       workContentsState === '' &&
       Number(manDayState) === 0 &&
       requesterState === '' &&
       Number(progressState) === 0 &&
-      noteState === '';
+      noteState === ''
+    ) {
+      isNoChange = true;
+    }
     if (isNoChange) return;
     await dispatch(deleteTaskData(task.id) as any);
     await dispatch(fetchTaskList() as any);

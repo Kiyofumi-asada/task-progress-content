@@ -2,10 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { TRequestData, TTaskList } from '../../types/task';
+import { TTaskList } from '../../types/task';
 import TableRow from './table-row';
 import { postTaskData } from '../../api';
-import { addNewRow } from '../helper/table';
 
 type TProps = {
   taskList: TTaskList;
@@ -19,19 +18,11 @@ const TableBody: React.FC<TProps> = ({ taskList }) => {
    * POST Task API call
    */
   const handleCreateNewRow = (taskList: TTaskList) => {
-    const body: TRequestData = {
-      id: taskList.id,
-      userName: taskList.userName,
-      task: {
-        selectedOptionId: -1,
-        workContents: '',
-        manDay: 0,
-        requester: '',
-        progress: 0,
-        note: '',
-      },
-    };
-    dispatch(postTaskData(body) as any);
+    dispatch(
+      postTaskData({
+        userId: taskList.id,
+      }) as any,
+    );
   };
 
   return (
