@@ -19,13 +19,17 @@ const read = async (): Promise<TGetUser[]> => {
         : {
             ...task,
             workContents: !workContents ? '' : workContents,
-            manDay: !manDay ? '' : manDay,
+            manDay: !manDay ? 0 : manDay,
             requester: !requester ? '' : requester,
             progress: !progress ? 0 : progress,
             note: !note ? '' : note,
             projects: projects,
           };
     });
+    //taskがない場合デフォルトデータを作成
+    const hasNotTask = !mergeTaskAndProjects.filter((v) => v).length;
+    if (hasNotTask) taskModels.create(id);
+
     return {
       id: id,
       userName: userName,
@@ -33,6 +37,8 @@ const read = async (): Promise<TGetUser[]> => {
       task: mergeTaskAndProjects.filter((v) => v),
     };
   });
+
+  console.log();
   return res;
 };
 

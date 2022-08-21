@@ -28,7 +28,6 @@ export const putTaskData = createAsyncThunk('task/putTaskData', async (body: any
 //DELETE
 export const deleteTaskData = createAsyncThunk('task/deleteTaskData', async (taskId: any) => {
   const deletePath = `${taskApiPath}?taskId=${taskId}`;
-  console.log('api call delete', deletePath);
   const { status, data } = await axios.delete<any[]>(deletePath);
   return { status, data };
 });

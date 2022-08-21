@@ -17,10 +17,8 @@ router.get('/', async (req, res, _next) => {
 router.post('/', async (req, res, next) => {
   try {
     const data = req.body;
-    console.log('req-----', data);
     await taskModels.create(data);
     const resData = await taskModels.read();
-    console.log('res-----', resData);
     res.status(200).json(resData).send;
   } catch (err) {
     res.status(500).send(err);

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { TTask, TRequestData, TTaskList } from '../../types/task';
-import { deleteTaskData, putTaskData } from '../../api';
+import { deleteTaskData, fetchTaskList, putTaskData } from '../../api';
 
 type TProps = {
   taskList: TTaskList;
@@ -84,8 +84,17 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   /**
    * DELETE Task API call
    */
-  const handleDelete = () => {
-    dispatch(deleteTaskData(task.id) as any);
+  const handleDelete = async () => {
+    const isNoChange =
+      Number(task.selectedOptionId) === -1 &&
+      workContentsState === '' &&
+      Number(manDayState) === 0 &&
+      requesterState === '' &&
+      Number(progressState) === 0 &&
+      noteState === '';
+    if (isNoChange) return;
+    await dispatch(deleteTaskData(task.id) as any);
+    await dispatch(fetchTaskList() as any);
   };
 
   return (
