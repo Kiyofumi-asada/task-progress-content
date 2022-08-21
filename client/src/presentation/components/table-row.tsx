@@ -72,17 +72,13 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   const onEnterClick2put = async (e: any) => {
     if (e.keyCode === 13) {
       await e.target.blur();
-      //データ変更していない場合はputしない
       if (!isChangedData) return;
-
       await dispatch(putTaskData(putBody) as any);
     }
   };
   //入力後inputからフォーカスを外す
   const onBlur2put = async () => {
-    //データ変更していない場合はputしない
     if (!isChangedData) return;
-
     await dispatch(putTaskData(putBody) as any);
     await setProgressOnFocus(false);
   };
