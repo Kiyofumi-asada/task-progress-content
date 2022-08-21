@@ -8,12 +8,7 @@ const read = async (): Promise<User[]> => {
       task: true,
     },
   });
-  const projects = await prisma.projects.findMany({
-    select: {
-      optionId: true,
-      label: true,
-    },
-  });
+  const projects = await prisma.projects.findMany({});
   const res = await userData.map((data) => {
     const { task } = data;
     const mergeTaskAndProjects = task.map((task) => {

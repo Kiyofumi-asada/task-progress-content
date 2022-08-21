@@ -16,7 +16,7 @@ export const headerData: THeaderData = [
 // body
 export const initialCreateNewUser: TRequestData = {
   userName: '',
-  progressData: {
+  task: {
     selectedOptionId: -1,
     workContents: '',
     manDay: 0,
@@ -29,7 +29,7 @@ export const initialCreateNewUser: TRequestData = {
 export const initialCreateNewRow: TRequestData = {
   userId: 1,
   userName: '',
-  progressData: {
+  task: {
     selectedOptionId: -1,
     workContents: '',
     manDay: 0,
@@ -42,12 +42,12 @@ export const initialCreateNewRow: TRequestData = {
 //TODO:開発完了後削除
 export const taskListMock: TTaskListArray = [
   {
-    userId: 1, //unique
+    id: 1, //unique
     userName: 'hoge',
-    progressData: [
+    task: [
       {
-        dataId: 1,
-        options: [
+        taskId: 1,
+        projects: [
           { id: 0, label: '値1' },
           { id: 1, label: '値2' },
           { id: 2, label: '値3' },
@@ -61,8 +61,8 @@ export const taskListMock: TTaskListArray = [
         delete: false, //null or Date??
       },
       {
-        dataId: 2,
-        options: [
+        taskId: 2,
+        projects: [
           { id: 0, label: '値1' },
           { id: 1, label: '値2' },
           { id: 2, label: '値3' },
@@ -76,8 +76,8 @@ export const taskListMock: TTaskListArray = [
         delete: false, //null or Date??
       },
       {
-        dataId: 3,
-        options: [
+        taskId: 3,
+        projects: [
           { id: 0, label: '値1' },
           { id: 1, label: '値2' },
           { id: 2, label: '値3' },
@@ -91,8 +91,8 @@ export const taskListMock: TTaskListArray = [
         delete: false, //null or Date??
       },
       {
-        dataId: 4,
-        options: [
+        taskId: 4,
+        projects: [
           { id: 0, label: '値1' },
           { id: 1, label: '値2' },
           { id: 2, label: '値3' },
@@ -108,12 +108,12 @@ export const taskListMock: TTaskListArray = [
     ],
   },
   {
-    userId: 2, //unique
+    id: 2, //unique
     userName: 'huga',
-    progressData: [
+    task: [
       {
-        dataId: 1,
-        options: [
+        taskId: 1,
+        projects: [
           { id: 0, label: '値1' },
           { id: 1, label: '値2' },
           { id: 2, label: '値3' },

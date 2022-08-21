@@ -1,12 +1,11 @@
 ## client
 
-```
-cd client
-```
+・typescript, react, redux, tailwind.css, electron
 
 ### local start
 
 ```
+cd client
 nvm use
 npm i
 npm run start
@@ -32,11 +31,13 @@ dist > mac > Task Progress Contents.app
 
 ## server
 
+・express, mysql, prisma
+
+### setup
+
 ```
 cd server
 ```
-
-### initial local setup
 
 1.create .env
 

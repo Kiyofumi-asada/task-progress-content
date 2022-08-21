@@ -28,8 +28,8 @@ const logicalDelete = async (detailId: number): Promise<void> => {
       id: detailId,
     },
     data: {
-      updated_at: new Date(),
-      is_delete: true,
+      updatedAt: new Date(),
+      isDelete: true,
     },
   });
 };

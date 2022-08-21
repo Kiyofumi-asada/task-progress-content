@@ -6,9 +6,9 @@ export type TInitialState = {
   taskList: TTaskListArray;
 };
 
-export type TProgressData = {
-  dataId: number;
-  options: { id: number; label: string }[];
+export type TTask = {
+  taskId: number;
+  projects: { id: number; label: string }[];
   selectedOptionId: number;
   workContents: string;
   manDay: number | string;
@@ -19,9 +19,9 @@ export type TProgressData = {
 };
 
 export type TTaskList = {
-  userId: number;
+  id: number;
   userName: string;
-  progressData?: TProgressData[] | [];
+  task?: TTask[] | [];
 };
 export type TPartialTaskList = Partial<TTaskList>;
 export type TTaskListArray = Array<TTaskList>;
@@ -29,8 +29,8 @@ export type TTaskListArray = Array<TTaskList>;
 export type TRequestData = {
   userId?: number;
   userName: string;
-  progressData: {
-    dataId?: number; //NOTE: dataIdを付ける場合はupdate,付けない場合はcreate
+  task: {
+    taskId?: number; //NOTE: dataIdを付ける場合はupdate,付けない場合はcreate
     selectedOptionId: number;
     workContents: string;
     manDay: number;

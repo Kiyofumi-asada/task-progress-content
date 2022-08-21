@@ -1,14 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { taskListMock } from '../presentation/helper/table';
-import toast from 'react-hot-toast';
 
 const path = 'task';
 
 //get
 export const fetchTaskList = createAsyncThunk('task/fetchTaskList', async () => {
-  const data = taskListMock;
-  //const { status, data } = await axios.get<any[]>(path);
+  const { data } = await axios.get<any[]>(path);
   return { data: data };
 });
 //post

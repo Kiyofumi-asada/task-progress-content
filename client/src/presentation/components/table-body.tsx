@@ -21,7 +21,7 @@ const TableBody: React.FC<TProps> = ({ dataList }) => {
   const handleCreateNewRow = (dataList: TTaskList) => {
     const body: TRequestData = {
       ...initialCreateNewRow,
-      userId: dataList.userId,
+      userId: dataList.id,
       userName: dataList.userName,
     };
     dispatch(postTaskData(body) as any);
@@ -29,9 +29,9 @@ const TableBody: React.FC<TProps> = ({ dataList }) => {
 
   return (
     <tbody>
-      {dataList.progressData?.map((data, idx) => (
-        <tr key={data.dataId}>
-          <TableRow dataList={dataList} data={data} idx={idx} />
+      {dataList.task?.map((task, idx) => (
+        <tr key={task.taskId}>
+          <TableRow dataList={dataList} task={task} idx={idx} />
         </tr>
       ))}
       <tr className="border-b-2 border-b-gray-800">

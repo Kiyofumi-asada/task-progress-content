@@ -2,8 +2,8 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { fromPairs } from 'ramda';
-import { CSVLink } from 'react-csv';
 import { THeaderData, TTaskListArray } from '../../types/table';
+import { CSVLink } from 'react-csv';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
 

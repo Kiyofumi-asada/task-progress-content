@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { TDeleteRequestData, TProgressData, TRequestData, TTaskList } from '../../types/table';
+import { TDeleteRequestData, TTask, TRequestData, TTaskList } from '../../types/table';
 import { deleteTaskData, putTaskData } from '../../api';
 
 type TProps = {
   dataList: TTaskList;
-  data: TProgressData;
+  task: TTask;
   idx: number;
 };
 
-const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
+const TableRow: React.FC<TProps> = ({ dataList, task, idx }) => {
   //react,redux
   const dispatch = useDispatch();
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
@@ -21,15 +21,15 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   const [progressState, setProgressState] = useState<string | number>('');
   const [noteState, setNoteState] = useState<string>('');
   useEffect(() => {
-    setWorkContentsState(data.workContents);
-    setManDayState(data.manDay);
-    setRequesterState(data.requester);
-    setProgressState(convertProgress(data.progress));
-    setNoteState(data.note);
+    setWorkContentsState(task.workContents);
+    setManDayState(task.manDay);
+    setRequesterState(task.requester);
+    setProgressState(convertProgress(task.progress));
+    setNoteState(task.note);
   }, []);
   //variable
   const noSelectedNumber = -1;
-  const rowSpanCount = dataList.progressData?.length ? dataList.progressData?.length + 1 : 1;
+  const rowSpanCount = dataList.task?.length ? dataList.task?.length + 1 : 1;
   const isFirstIdx = idx === 0;
   //function
   const convertProgress = (progress: number | string): number => Number(progress) * 100;
@@ -40,11 +40,11 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
    * put api call
    */
   const putBody: TRequestData = {
-    userId: dataList.userId,
+    userId: dataList.id,
     userName: dataList.userName,
-    progressData: {
-      dataId: data.dataId,
-      selectedOptionId: data.selectedOptionId,
+    task: {
+      taskId: task.taskId,
+      selectedOptionId: task.selectedOptionId,
       workContents: workContentsState ?? '',
       manDay: Number(manDayState) ?? 0,
       requester: requesterState ?? '',
@@ -69,8 +69,8 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
   const selectedOption2put = (selectedId: any) => {
     const putBody4selectBox = {
       ...putBody,
-      progressData: {
-        dataId: data.dataId,
+      task: {
+        dataId: task.taskId,
         selectedOptionId: Number(selectedId),
         workContents: workContentsState ?? '',
         manDay: Number(manDayState) ?? 0,
@@ -85,7 +85,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
    * delete api call
    */
   const handleDelete = () => {
-    const params: TDeleteRequestData = { userId: dataList.userId, dataId: data.dataId };
+    const params: TDeleteRequestData = { userId: dataList.id, dataId: task.taskId };
     dispatch(deleteTaskData(params) as any);
   };
 
@@ -102,17 +102,17 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 案件名 */}
       <td
         className={
-          isAchieve(data.progress) ? 'flex-none border bg-gray-300 py-0 text-xs' : 'flex-none border py-0 text-xs'
+          isAchieve(task.progress) ? 'flex-none border bg-gray-300 py-0 text-xs' : 'flex-none border py-0 text-xs'
         }
       >
         <select
-          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
-          defaultValue={data.selectedOptionId}
+          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
+          defaultValue={task.selectedOptionId}
           onChange={(e) => selectedOption2put(e.target.value)}
         >
           <option value={noSelectedNumber}>---</option>
-          {data.options.map((option) => (
-            <option defaultValue={data.selectedOptionId} key={option.id} value={option.id}>
+          {task.projects.map((option) => (
+            <option defaultValue={task.selectedOptionId} key={option.id} value={option.id}>
               {option.label}
             </option>
           ))}
@@ -121,13 +121,13 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 作業内容 */}
       <td
         className={
-          isAchieve(data.progress)
+          isAchieve(task.progress)
             ? 'flex-none border bg-gray-300 px-1 py-0 text-xs'
             : 'flex-none border px-1 py-0 text-xs'
         }
       >
         <input
-          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
+          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
           type="text"
           name="workContents"
           id="workContents"
@@ -141,13 +141,13 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 人日 */}
       <td
         className={
-          isAchieve(data.progress)
+          isAchieve(task.progress)
             ? 'flex-none border bg-gray-300 py-0 text-center text-xs'
             : 'flex-none border py-0 text-center text-xs'
         }
       >
         <input
-          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
+          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
           type="text"
           name="manDay"
           id="manDay"
@@ -163,13 +163,13 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 依頼者 */}
       <td
         className={
-          isAchieve(data.progress)
+          isAchieve(task.progress)
             ? 'flex-none border bg-gray-300 text-center text-center text-xs'
             : 'flex-none border text-center text-xs'
         }
       >
         <input
-          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
+          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
           type="text"
           name="requester"
           id="requester"
@@ -183,7 +183,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 進捗 */}
       <td
         className={
-          isAchieve(data.progress)
+          isAchieve(task.progress)
             ? 'flex-none border bg-gray-300 text-center text-xs'
             : 'flex-none border text-center text-xs'
         }
@@ -191,7 +191,7 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
         <div className="flex">
           <input
             className={
-              isAchieve(data.progress) ? 'h-8 w-full flex-1 bg-gray-300 text-center' : 'h-8 w-full flex-1 text-center'
+              isAchieve(task.progress) ? 'h-8 w-full flex-1 bg-gray-300 text-center' : 'h-8 w-full flex-1 text-center'
             }
             type="text"
             name="progress"
@@ -208,11 +208,11 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 備考 */}
       <td
         className={
-          isAchieve(data.progress) ? 'flex-none border bg-gray-300 px-1 text-xs' : 'flex-none border px-1 text-xs'
+          isAchieve(task.progress) ? 'flex-none border bg-gray-300 px-1 text-xs' : 'flex-none border px-1 text-xs'
         }
       >
         <input
-          className={isAchieve(data.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
+          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
           type="text"
           name="note"
           id="note"
@@ -226,14 +226,14 @@ const TableRow: React.FC<TProps> = ({ dataList, data, idx }) => {
       {/* 削除 */}
       <td
         className={
-          isAchieve(data.progress)
+          isAchieve(task.progress)
             ? 'flex-none border bg-gray-300 text-center text-xs'
             : 'flex-none border text-center text-xs'
         }
       >
         <div
           className={
-            isAchieve(data.progress)
+            isAchieve(task.progress)
               ? 'cursor-pointer bg-gray-300 px-2 hover:text-red-600'
               : 'cursor-pointer px-2 hover:text-red-600'
           }

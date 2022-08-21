@@ -15,6 +15,7 @@ const Content: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const taskDataList = useSelector(selectTaskList);
 
+  console.log(taskDataList);
   //function
   const modalOpen = () => {
     setIsModalOpen(true);
@@ -34,7 +35,7 @@ const Content: React.FC = () => {
           <table className="group table-fixed">
             <TableHeader headerData={headerData} dataList={taskDataList} />
             {taskDataList.map((dataList) => (
-              <TableBody key={dataList.userId} dataList={dataList} />
+              <TableBody key={dataList.id} dataList={dataList} />
             ))}
           </table>
           <div
