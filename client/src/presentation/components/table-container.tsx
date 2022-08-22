@@ -8,6 +8,7 @@ import { fetchTaskList } from '../../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import CreateUser from './create-user';
+import { Link } from 'react-router-dom';
 
 const TableContainer: React.FC = () => {
   //react,redux
@@ -44,6 +45,8 @@ const TableContainer: React.FC = () => {
             <FontAwesomeIcon icon={faPlus} />
           </div>
           {isModalOpen ? <CreateUser setIsModalOpen={setIsModalOpen} /> : null}
+          <Link to="/user">UserEdit</Link>
+          <Link to="/projects">ProjectsEdit</Link>
         </div>
       </div>
     </div>
