@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/react-sortable-hoc": "^0.7.1",
+    "react-sortable-hoc": "^2.0.0"
+  }
+}
