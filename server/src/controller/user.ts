@@ -4,6 +4,16 @@ import { taskModels } from '@/model/task';
 
 const router = express.Router();
 
+// GET
+router.get('/', async (_req, res) => {
+  try {
+    const resData = await userModels.read();
+    res.status(200).json(resData).send;
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 // POST
 router.post('/', async (req, res) => {
   try {
@@ -32,8 +42,8 @@ router.put('/', async (req, res) => {
 //DELETE
 router.delete('/', async (req, res) => {
   try {
-    const taskId = Number(`${req.query.taskId}`);
-    await userModels.logicalDelete(taskId);
+    const userId = Number(`${req.query.userId}`);
+    await userModels.logicalDelete(userId);
     const resData = await taskModels.read();
     res.status(200).json(resData).send;
   } catch (err) {

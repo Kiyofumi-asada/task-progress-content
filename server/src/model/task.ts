@@ -73,6 +73,7 @@ const logicalDelete = async (taskId: number): Promise<void> => {
       id: taskId,
     },
     data: {
+      updatedAt: new Date(),
       isDelete: true,
     },
   });

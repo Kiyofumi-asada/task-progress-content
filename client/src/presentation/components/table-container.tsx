@@ -39,14 +39,19 @@ const TableContainer: React.FC = () => {
             ))}
           </table>
           <div
-            className="m-1.5 h-6 w-6 cursor-pointer rounded-sm bg-slate-700 text-center text-white hover:bg-slate-900 "
+            className="m-1.5 h-6 w-6 cursor-pointer rounded-sm bg-slate-700 text-center text-white hover:bg-slate-900"
             onClick={modalOpen}
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
           {isModalOpen ? <CreateUser setIsModalOpen={setIsModalOpen} /> : null}
-          <Link to="/user">UserEdit</Link>
-          <Link to="/projects">ProjectsEdit</Link>
+
+          <button className="mx-2 mt-0 mb-1 w-20 rounded border border-gray-400 bg-white px-2 py-1 text-xs font-semibold text-gray-800 shadow hover:bg-gray-100">
+            <Link to="/user">User Edit</Link>
+          </button>
+          <button className="my-1 mx-2 w-24 rounded border border-gray-400 bg-white px-2 py-1 text-xs font-semibold text-gray-800 shadow hover:bg-gray-100">
+            <Link to="/projects">Projects Edit</Link>
+          </button>
         </div>
       </div>
     </div>

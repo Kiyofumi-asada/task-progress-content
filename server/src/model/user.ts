@@ -1,6 +1,11 @@
 import { errorHandler, prisma } from '.';
 import { User } from '@prisma/client';
 
+//GET
+const read = async (): Promise<User[]> => {
+  return await prisma.user.findMany({});
+};
+
 //POST
 const create = async (data: User): Promise<User> => {
   const createUser = await prisma.user.create({ data });
@@ -10,31 +15,31 @@ const create = async (data: User): Promise<User> => {
 //PUT
 const edit = async (data: User): Promise<void> => {
   const { id } = data;
-  await prisma.task.update({
+  await prisma.user.update({
     where: {
       id: id,
     },
-    data: {
-      updatedAt: new Date(),
-    },
+    data: data,
   });
 };
 
 //DELETE
-const logicalDelete = async (taskId: number): Promise<void> => {
-  await prisma.task.update({
+const logicalDelete = async (userId: number): Promise<void> => {
+  await prisma.user.update({
     where: {
-      id: taskId,
+      id: userId,
     },
     data: {
+      updatedAt: new Date(),
       isDelete: true,
     },
   });
 };
 
 export const userModels = {
+  read: (): Promise<User[]> => errorHandler(read()),
   create: (data: User): Promise<User> => errorHandler(create(data)),
   edit: (data: User): Promise<void> => errorHandler(edit(data)),
-  logicalDelete: (taskId: number): Promise<void> =>
-    errorHandler(logicalDelete(taskId)),
+  logicalDelete: (userId: number): Promise<void> =>
+    errorHandler(logicalDelete(userId)),
 };
