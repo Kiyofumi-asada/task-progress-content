@@ -31,6 +31,7 @@ class App {
     this.app.use('/', indexRouter);
     this.app.use('/task', taskRouter);
     this.app.use('/user', userRouter);
+    this.app.use('/projects', userRouter);
   }
 
   private errorHandler() {

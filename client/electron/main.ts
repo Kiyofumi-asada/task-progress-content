@@ -1,12 +1,10 @@
 import { app, BrowserWindow } from 'electron';
-import * as path from 'path';
-
-const isLocal = process.env.REACT_APP_IS_LOCAL;
+import * as isDev from 'electron-is-dev';
 
 let win: BrowserWindow | null = null;
 const createWindow = () => {
   win = new BrowserWindow({
-    fullscreen: true,
+    fullscreen: false,
     width: 1500,
     height: 1000,
     webPreferences: {
@@ -15,19 +13,14 @@ const createWindow = () => {
     },
   });
 
-  if (isLocal) {
+  if (isDev) {
     win.loadURL('http://localhost:3000/index.html');
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    require('electron-reload')(__dirname, {
-      electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron'),
-      forceHardReset: true,
-      hardResetMethod: 'exit',
-    });
   } else {
-    win.loadURL(`file://${__dirname}/../index.html`);
-    win.webContents.on('devtools-opened', () => {
-      win?.webContents.closeDevTools();
-    });
+    win.loadURL('http://localhost:3000/index.html');
+    //win.loadURL(`file://${__dirname}/../index.html`);
+    // win.webContents.on('devtools-opened', () => {
+    //   win?.webContents.closeDevTools();
+    // });
   }
   win.on('closed', () => (win = null));
 };

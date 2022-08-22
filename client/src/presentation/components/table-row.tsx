@@ -70,7 +70,6 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   const onEnterClick2put = async (e: any) => {
     if (e.keyCode === 13) {
       if (!isChangedData) return;
-      console.log('enter');
       await dispatch(putTaskData(putBody) as any);
       await e.target.blur();
     }
