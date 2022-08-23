@@ -10,5 +10,4 @@ const EditUser: React.FC = () => {
     </div>
   );
 };
-
 export default EditUser;

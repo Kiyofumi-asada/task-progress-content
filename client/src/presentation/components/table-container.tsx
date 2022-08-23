@@ -44,7 +44,7 @@ const TableContainer: React.FC = () => {
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
-          {isModalOpen ? <CreateUser setIsModalOpen={setIsModalOpen} /> : null}
+          {isModalOpen && <CreateUser setIsModalOpen={setIsModalOpen} />}
 
           <button className="mx-2 mt-0 mb-1 w-20 rounded border border-gray-400 bg-white px-2 py-1 text-xs font-semibold text-gray-800 shadow hover:bg-gray-100">
             <Link to="/user">User Edit</Link>

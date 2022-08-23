@@ -255,13 +255,7 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         />
       </td>
       {/* 削除 */}
-      <td
-        className={
-          isAchieve(task.progress)
-            ? 'flex-none border bg-gray-300 text-center text-xs'
-            : 'flex-none border text-center text-xs'
-        }
-      >
+      <td className={`flex-none border text-center text-xs${isAchieve(task.progress) && 'bg-gray-300'}`}>
         <div
           className={
             isAchieve(task.progress)

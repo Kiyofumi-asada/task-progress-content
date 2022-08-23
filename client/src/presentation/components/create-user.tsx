@@ -75,7 +75,7 @@ const CreateUser: React.FC<TProps> = ({ setIsModalOpen }) => {
           </div>
         </div>
       </div>
-      <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
+      <div className="fixed inset-0 z-40 bg-black opacity-25" />
     </>
   );
 };

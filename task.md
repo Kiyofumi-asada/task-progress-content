@@ -24,9 +24,9 @@
 
 - user api
 
-  - [ ] controller
-  - [ ] model
+  - [x] controller
+  - [x] model
 
-- [ ] project api
+- project api
   - [ ] controller
   - [ ] model
