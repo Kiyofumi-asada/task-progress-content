@@ -8,16 +8,13 @@ type TProps = {
 };
 
 const CreateUser: React.FC<TProps> = ({ setIsModalOpen }) => {
-  //react,redux
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState<string>('');
-  //variable
+
   const userNameRef = React.useRef<HTMLInputElement>(null);
   const isDisabled = inputText.length ? false : true;
-  //function
-  /**
-   * POST User API call
-   */
+
+  //POST User API call
   const handleCreateNewUser = async () => {
     const body: TRequestCreateUserData = {
       userName: userNameRef.current?.value ?? '',

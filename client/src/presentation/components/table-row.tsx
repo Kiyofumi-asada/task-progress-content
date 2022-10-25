@@ -12,7 +12,6 @@ type TProps = {
 };
 
 const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
-  //react,redux
   const dispatch = useDispatch();
   const [progressOnFocus, setProgressOnFocus] = useState<boolean>(false);
   const [workContentsState, setWorkContentsState] = useState<string>('');
@@ -29,10 +28,12 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
     setNoteState(task.note);
   }, []);
 
-  //variable
   const noSelectedNumber = -1;
   const rowSpanCount = taskList.task?.length ? taskList.task?.length + 1 : 1;
   const isFirstIndex = index === 0;
+  const isAchieve = (int: number | string): boolean => 100 <= Number(int);
+  const changeArchiveColor = isAchieve(task.progress) && 'bg-gray-300';
+
   let isChangedData = false;
   if (
     workContentsState !== task.workContents ||
@@ -45,13 +46,8 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
   } else {
     isChangedData = false;
   }
-  //function
-  const isAchieve = (int: number | string): boolean => 100 <= Number(int);
 
-  //dispatch
-  /**
-   * PUT Task API call
-   */
+  //PUT Task API call
   const putBody: TRequestData = {
     id: taskList.id,
     userName: taskList.userName,
@@ -131,13 +127,9 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         </>
       ) : null}
       {/* 案件名 */}
-      <td
-        className={
-          isAchieve(task.progress) ? 'flex-none border bg-gray-300 py-0 text-xs' : 'flex-none border py-0 text-xs'
-        }
-      >
+      <td className={`flex-none border py-0 text-xs ${changeArchiveColor}`}>
         <select
-          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
+          className={`h-8 w-full text-center ${changeArchiveColor}`}
           defaultValue={task.selectedOptionId}
           onChange={(e) => selectedOption2put(e.target.value)}
         >
@@ -150,15 +142,9 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         </select>
       </td>
       {/* 作業内容 */}
-      <td
-        className={
-          isAchieve(task.progress)
-            ? 'flex-none border bg-gray-300 px-1 py-0 text-xs'
-            : 'flex-none border px-1 py-0 text-xs'
-        }
-      >
+      <td className={`flex-none border px-1 py-0 text-xs ${changeArchiveColor}`}>
         <input
-          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
+          className={`h-8 w-full ${changeArchiveColor}`}
           type="text"
           name="workContents"
           id="workContents"
@@ -170,15 +156,9 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         />
       </td>
       {/* 人日 */}
-      <td
-        className={
-          isAchieve(task.progress)
-            ? 'flex-none border bg-gray-300 py-0 text-center text-xs'
-            : 'flex-none border py-0 text-center text-xs'
-        }
-      >
+      <td className={`flex-none border py-0 text-center text-xs ${changeArchiveColor}`}>
         <input
-          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
+          className={`h-8 w-full text-center ${changeArchiveColor}`}
           type="text"
           name="manDay"
           id="manDay"
@@ -192,15 +172,9 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         />
       </td>
       {/* 依頼者 */}
-      <td
-        className={
-          isAchieve(task.progress)
-            ? 'flex-none border bg-gray-300 text-center text-center text-xs'
-            : 'flex-none border text-center text-xs'
-        }
-      >
+      <td className={`flex-none border text-center text-xs ${changeArchiveColor}`}>
         <input
-          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300 text-center' : 'h-8 w-full text-center'}
+          className={`h-8 w-full text-center ${changeArchiveColor}`}
           type="text"
           name="requester"
           id="requester"
@@ -212,18 +186,10 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         />
       </td>
       {/* 進捗 */}
-      <td
-        className={
-          isAchieve(task.progress)
-            ? 'flex-none border bg-gray-300 text-center text-xs'
-            : 'flex-none border text-center text-xs'
-        }
-      >
+      <td className={`flex-none border text-center text-xs ${changeArchiveColor}`}>
         <div className="flex">
           <input
-            className={
-              isAchieve(task.progress) ? 'h-8 w-full flex-1 bg-gray-300 text-center' : 'h-8 w-full flex-1 text-center'
-            }
+            className={`h-8 w-full flex-1 text-center ${changeArchiveColor}`}
             type="text"
             name="progress"
             placeholder="0-100"
@@ -237,13 +203,9 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         </div>
       </td>
       {/* 備考 */}
-      <td
-        className={
-          isAchieve(task.progress) ? 'flex-none border bg-gray-300 px-1 text-xs' : 'flex-none border px-1 text-xs'
-        }
-      >
+      <td className={`flex-none border px-1 text-xs ${changeArchiveColor}`}>
         <input
-          className={isAchieve(task.progress) ? 'h-8 w-full bg-gray-300' : 'h-8 w-full'}
+          className={`h-8 w-full ${changeArchiveColor}`}
           type="text"
           name="note"
           id="note"
@@ -255,15 +217,8 @@ const TableRow: React.FC<TProps> = ({ taskList, task, index }) => {
         />
       </td>
       {/* 削除 */}
-      <td className={`flex-none border text-center text-xs${isAchieve(task.progress) && 'bg-gray-300'}`}>
-        <div
-          className={
-            isAchieve(task.progress)
-              ? 'cursor-pointer bg-gray-300 px-2 hover:text-red-600'
-              : 'cursor-pointer px-2 hover:text-red-600'
-          }
-          onClick={() => handleDelete()}
-        >
+      <td className={`flex-none border text-center text-xs ${changeArchiveColor}`}>
+        <div className={`cursor-pointer px-2 hover:text-red-600 ${changeArchiveColor}`} onClick={() => handleDelete()}>
           <FontAwesomeIcon icon={faTrashCan} />
         </div>
       </td>

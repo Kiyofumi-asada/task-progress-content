@@ -11,12 +11,9 @@ type TProps = {
 };
 
 const TableBody: React.FC<TProps> = ({ taskList }) => {
-  //react,redux
   const dispatch = useDispatch();
-  //function
-  /**
-   * POST Task API call
-   */
+
+  //POST Task API call
   const handleCreateNewRow = (taskList: TTaskList) => {
     dispatch(
       postTaskData({

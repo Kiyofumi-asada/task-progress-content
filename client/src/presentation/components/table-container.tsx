@@ -11,19 +11,15 @@ import CreateUser from './create-user';
 import { Link } from 'react-router-dom';
 
 const TableContainer: React.FC = () => {
-  //react,redux
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const userTaskList = useSelector(selectTaskList);
 
-  //function
+  const userTaskList = useSelector(selectTaskList);
   const modalOpen = () => {
     setIsModalOpen(true);
   };
-  //dispatch
-  /**
-   * GET Task API call
-   */
+
+  //GET Task API call
   useEffect(() => {
     dispatch(fetchTaskList() as any);
   }, [dispatch]);
